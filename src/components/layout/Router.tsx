@@ -1,10 +1,9 @@
 import React, { Suspense, useState } from "react";
 import { UserContext } from "../../context/UserContext";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { BASKET_TYPE_CHOICES, BASKET_UNKNOWN, SYSTEM_CHOICES } from "../Enumerators";
 
 // import Home from "../../pages/Home";
-import Main from "../../pages/Main";
 import Rules from "../../pages/Rules";
 //import Contact from "../../pages/Contact";
 //import Inquiry from "../../pages/Inquiry";
@@ -278,15 +277,7 @@ export const Router = () => {
                     <div className="router-content ">
                         <Routes>
                             <Route path="/redirect/:token" element={<RedirectInto />} />
-                            <Route
-                                path="/"
-                                element={
-                                    <PageLayout bodyClassName={"has-background-white-ter"}>
-                                        {/* bodyClassName={"is-primary-gradient"}> */}
-                                        <Main />
-                                    </PageLayout>
-                                }
-                            />
+                            <Route path="/" element={<Navigate to="/kursy" replace />} />
                             <Route
                                 path="/list/:categoryId"
                                 element={
