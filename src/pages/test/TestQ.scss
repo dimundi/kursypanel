@@ -1,0 +1,120 @@
+// Colors
+$color-5: #01af4955;
+$color-55: #01af49;
+$color-5txt: #00461d;
+
+$color-4: #85db3455;
+$color-44: #85db34;
+$color-4txt: #599423;
+
+$color-3: #f1c80f55;
+$color-33: #f1c80f;
+$color-3txt: #967c0b;
+
+$color-2: #e78f3c55;
+$color-22: #e78f3c;
+$color-2txt: #855324;
+
+$color-1: #e74c3c55;
+$color-11: #e74c3c;
+$color-1txt: #531c16;
+$opacity_value: 0.33;
+
+.custom-radios {
+    div {
+        display: inline-block;
+    }
+    input[type="radio"] {
+        display: none;
+
+        + label {
+            //color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+
+            span {
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                //margin: 0px 0px 0 0;
+                vertical-align: middle;
+                cursor: pointer;
+                border-radius: 50%;
+                border: 2px solid #ffffff;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+                // background-repeat: no-repeat;
+                // background-position: center;
+                text-align: center;
+
+                img {
+                    opacity: 0;
+                    transition: all 0.3s ease;
+                }
+            }
+        }
+
+        &.color-1 + label span {
+            background-color: $color-1;
+            color: $color-1txt;
+        }
+        &.color-1:checked + label span {
+            border: 2px solid $color-1txt;
+            background-color: $color-11;
+        }
+
+        &.color-2 + label span {
+            background-color: $color-2;
+            color: $color-2txt;
+        }
+        &.color-2:checked + label span {
+            border: 2px solid $color-2txt;
+            background-color: $color-22;
+        }
+
+        &.color-3 + label span {
+            background-color: $color-3;
+            color: $color-3txt;
+        }
+        &.color-3:checked + label span {
+            border: 2px solid $color-3txt;
+            background-color: $color-33;
+        }
+
+        &.color-4 + label span {
+            background-color: $color-4;
+            color: $color-4txt;
+        }
+        &.color-4:checked + label span {
+            border: 2px solid $color-4txt;
+            background-color: $color-44;
+        }
+
+        &.color-5 + label span {
+            background-color: $color-5;
+            color: $color-5txt;
+        }
+        &.color-5:checked + label span {
+            border: 2px solid $color-5txt;
+            background-color: $color-55;
+        }
+
+        // &.color-6 + label span {
+        //     background-color: $color-6;
+        // }
+        // &:checked + label span img {
+        //     opacity: 1;
+        // }
+        // &:checked + label span {
+        //     // color: #222;
+        //     //font-size: 2em;
+        //     // padding-left: 3px;
+        //     // padding-bottom: 2px;
+        //     border: 2px solid #aaa;
+        //     opacity: 1;
+        // }
+    }
+    .dis {
+        background-color: black;
+    }
+}

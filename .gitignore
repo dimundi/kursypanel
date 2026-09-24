@@ -1,0 +1,62 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+#configuration
+/public/Config.json
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+.npm
+yarn.lock
+ui.code-workspace
+*.bak
+
+# Local environment settings; only sanitized examples belong in Git
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Additional build outputs and caches
+/build-dev/
+/build-prod/
+/build-stage/
+/dist/
+/.cache/
+*.tsbuildinfo
+
+# Private keys, certificates and database dumps
+*.pem
+*.key
+*.ppk
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+*.sql
+*.sql.*
+*.dump
+*.dump.*
+
+# Logs and local editor/OS files
+*.log
+*.swp
+*.swo
+*~
+Thumbs.db
+Desktop.ini

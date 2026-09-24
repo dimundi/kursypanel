@@ -1,0 +1,596 @@
+@charset "utf-8";
+// Set your brand colors
+$lightmain: #007cff;
+$main: #0c4e98;
+$accent: #01aaad;
+$accent-light: #01aaad;
+$accent-extralight: #73cbcd;
+
+// Path to Bulma's sass folder
+@use "bulma/sass" with (
+  $family-primary: '"Nunito", sans-serif',
+  $primary: $main,
+  $link: $accent,
+  $info : #2b93d2,
+//   $info: $main
+);
+
+// Import a Google Font
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+
+@import "bulma/bulma.scss";
+@import "bulma-list/sass/bulma-list.scss";
+@import "bulma/sass/utilities/mixins.scss";
+
+/*
+@import "~bulma/sass/utilities/_all.sass";
+@import "~bulma/sass/base/_all.sass";
+@import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/elements/title.sass";
+@import "~bulma/sass/form/_all.sass";
+@import "~bulma/sass/components/navbar.sass";
+@import "~bulma/sass/layout/hero.sass";
+@import "~bulma/sass/layout/section.sass";*/
+
+.is-accent {
+    background-color: $accent;    
+    color:#ffffff;
+}
+
+.box.main-action-box {
+    background: #2195f300;
+    /* width: 45%;*/
+    margin-bottom: 1.5rem;
+    border: 1px solid #5a6ac8;
+    transition: background-color 0.4s ease;
+}
+.box.main-action-box:hover {
+    background: #2196f324;
+}
+
+.box.main-action-box img {
+    height: 140px;
+    margin-bottom: 10px;
+    max-width: 100%;
+}
+
+#course-bigbox {
+    background: linear-gradient(0deg, rgba(1, 170, 173, 1) 0%, rgba(0, 212, 255, 1) 100%);
+    background: linear-gradient(0deg, rgba(1, 170, 173, 1) 0%, rgba(0, 176, 255, 1) 100%);
+    background: linear-gradient(0deg, rgba(1, 170, 173, 1) 0%, rgba(9, 9, 121, 1) 66%, rgba(0, 176, 255, 1) 100%);
+    background: linear-gradient(0deg, rgba(1, 170, 173, 1) 0%, rgba(55, 55, 208, 1) 51%, rgba(0, 176, 255, 1) 100%);
+    background: linear-gradient(0deg, rgba(1, 170, 173, 1) 0%, rgba(9, 9, 121, 1) 66%, rgba(0, 212, 255, 1) 100%);
+}
+.ocean-holder {
+    position: relative;
+    overflow: hidden;
+}
+.ocean {
+    height: 5%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #015871;
+}
+
+// .wave {
+//   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
+//   position: absolute;
+//   top: -198px;
+//   width: 6400px;
+//   height: 198px;
+//   animation: wave 30s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
+//   transform: translate3d(0, 0, 0);
+// }
+
+@keyframes wave {
+    0% {
+        margin-left: 0;
+    }
+    100% {
+        margin-left: -1600px;
+    }
+}
+
+body .hero.is-primary.is-bold {
+    //background-image: linear-gradient(141deg, #071a32 0%, #0c4e98 71%, #093db4 100%);
+    //background-image: url("../public/images/szkolenia-bg.jpg");
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.footer {
+    background-color: hsl(0deg 0% 96%);
+}
+// .has-background-accent {
+//     background-color: $accent;
+// }
+// .has-background-accent-light {
+//     background-color: $accent-light;
+// }
+// .has-background-accent-extralight {
+//     background-color: $accent-extralight;
+// }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0.5rem;
+}
+p {
+    margin-bottom: 0.5rem;
+}
+
+.tab,
+.inactive {
+    display: none;
+}
+.tab.active {
+    display: block;
+}
+
+h2.title {
+    font-size: 1.5rem;
+}
+h3.title {
+    font-size: 1.375rem;
+}
+h4.title {
+    font-size: 1.15rem;
+}
+.center-with-margin {
+    margin: 0 auto;
+}
+.container.readable:not(.is-max-desktop):not(.is-max-widescreen) {
+    max-width: 960px;
+}
+.container.readable .blocks-wrap {
+    font-size: 1.4rem;
+}
+
+.notification {
+    font-size: 1rem;
+}
+
+.blocks-wrap {
+    border-left: 4px solid #01aaad;
+    padding-left: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.slim {
+    width: 468px;
+    max-width: 100%;
+}
+.slim-wrap {
+    max-width: 310px;
+    margin: 0 auto;
+}
+.medium-wrap {
+    max-width: 667px;
+    margin: 0 auto;
+}
+.medium-wrap .field-label {
+    min-width: 150px;
+}
+.error-code {
+    display: block;
+    color: #ca9b9b;
+    font-size: 75%;
+}
+
+.course-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.course {
+    @extend .box;
+    transition: transform 0.3s ease;
+}
+.course:hover {
+    transform: scale(0.98);
+}
+.course-list .course {
+    width: 30%;
+    min-height: 260px;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+    margin-bottom: 2rem;
+    position: relative;
+}
+@media (max-width: 512px) {
+    .course-list .course {
+        width: 100%;
+    }
+}
+
+.course-shopinfo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.panel-content:not(.is-active) {
+    display: none;
+}
+
+progress {
+    text-align: center;
+}
+progress:after {
+    content: attr(value) "%";
+    position: relative;
+    top: -20px;
+    font-size: 12px;
+}
+
+.radio-list {
+    margin: 0.5em 0;
+
+    .radio {
+        display: block;
+
+        & + .radio {
+            margin-left: 0;
+            margin-top: 0.5em;
+        }
+    }
+}
+
+/* --------------------
+    PRODUCT LIST
+----------------------*/
+.product-list-price {
+    min-width: 70px;
+    font-weight: bold;
+    font-size: 1.15rem;
+}
+.area-type {
+    color: #474e73;
+    margin-right: 1rem;
+}
+
+/* --------------------
+    CART
+----------------------*/
+.step {
+    padding: 0 40px;
+    text-transform: uppercase;
+    line-height: 25px;
+    font-size: 14px;
+}
+.webi-steps-wrap {
+    background: #ececec;
+    border-radius: 15px;
+}
+.webi-circle {
+    background: #989898;
+    padding: 5px 13px;
+    margin-right: 7px;
+    font-size: 21px;
+    border-radius: 50%;
+    color: #fff;
+}
+.webi-circle.active {
+    background: $main;
+}
+.remove-from-cart-btn {
+    height: 50px;
+    width: 50px;
+    background-color: #dbdbdb;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+.remove-from-cart-btn:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "\D7";
+    font-size: 50px;
+    color: #646464;
+    line-height: 50px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.cart-col-prices > div:not(:last-child) {
+    @extend .mr-3;
+}
+.cart-col-prices label {
+    display: block;
+}
+#webinar-summary .input,
+.cart-col-prices .input {
+    box-sizing: border-box;
+    background-color: #e0f7fa;
+    text-align: right;
+    padding: 0 15px;
+    width: 100px;
+    min-width: 100px;
+    height: 2.4375rem;
+    line-height: 38px;
+    border-bottom: 1px solid blue;
+}
+.webinar-details {
+    display: flex;
+    align-items: center;
+}
+.webinar-details-item {
+    color: #343434;
+    font-size: 16px;
+    margin-right: 20px;
+}
+#webinar-summary {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    text-align: right;
+    background-color: #dedede;
+    padding: 15px;
+}
+#webinar-summary > div:not(:last-child) {
+    margin-right: 25px;
+}
+.cart-col {
+    @extend .p-4;
+}
+.cart-col-item {
+    flex-grow: 1;
+}
+
+/*----------------
+
+KURS OPIS W SKLEPIE
+
+----------------*/
+.course-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 6px;
+    opacity: 0.4;
+}
+// #course-heading {
+//   padding: 5rem 0;
+//   background-image: url(https://rewers.edu.pl/wp-content/uploads/2021/02/grupa-rewers-desaturated.jpg)
+// }
+.author-photo {
+    border-radius: 100%;
+    border: 13px solid white;
+    box-shadow: 0 0 17px #01aaad;
+    min-width: 300px;
+}
+.course-feature {
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.course-feature img {
+    display: block;
+    margin: 1rem auto;
+}
+// #course-detail {
+//   background-image: url(https://rewers.edu.pl/wp-content/uploads/2022/08/tlo-program-2.jpg);
+// }
+
+.author-bio {
+    font-style: italic;
+    color: #747474;
+}
+#course-bigbox ul > li {
+    list-style: none;
+    position: relative;
+    padding: 0 0 0 20px;
+    line-height: 1.1;
+    margin-bottom: 1.4rem;
+}
+#course-bigbox ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    height: 5px;
+    width: 5px;
+    border: 1px solid #f9dd94;
+    border-width: 2px 2px 0 0;
+    transform: rotate(45deg);
+}
+
+/*----------------
+
+KURS CONTENT, LEKCJE
+
+----------------*/
+.cert-cond {
+    background: #e9e9e9;
+    padding: 1rem;
+    border-radius: 2px;
+}
+.cond-icon {
+    color: #7a7a7a;
+    transform: translateY(2px);
+    display: inline-block;
+}
+.query label.radio {
+    padding-left: 24px;
+}
+.query input[type="radio"],
+.query input[type="checkbox"] {
+    position: absolute;
+    left: 0px;
+    top: 7px;
+}
+
+// .fixed_title_width {
+//     width: 580px;
+// }
+
+.fix-bottom-button {
+    position: fixed;
+    right: 0;
+    top: 12.5rem;
+    padding-left: 1em;
+    padding-right: 0.3em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    background-image: linear-gradient(90deg, #ffa513, #ff5a1c);
+    box-shadow: 0 0.13333rem 0.4rem 0 rgba(255, 80, 0, 0.4);
+
+    border-radius: 0.6rem 0rem 0em 0.6em;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    z-index: 999;
+    /* height: 3rem; */
+    /* line-height: 2;*/
+}
+.side-button-container {
+    position: fixed;
+    right: -12em;
+    top: 12.5rem;
+    padding-left: 1em;
+    padding-right: 0em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    z-index: 999;
+}
+
+.side-button {
+    position: relative;
+    background-image: linear-gradient(90deg, #ffa513, #ff5a1c);
+    box-shadow: 0 0.13333rem 0.4rem 0 rgba(255, 80, 0, 0.4);
+
+    border-radius: 0.6rem 0rem 0em 0.6em;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    width: 12em;
+    height: 3em;
+    line-height: 3em;
+    left: -10em;
+    // text-align: center;
+}
+.side-button-content {
+    padding-left: 0.5em;
+    // display: inline-block;
+    // vertical-align: middle;
+    // line-height: normal;
+}
+
+.side-button-hide-animation {
+    // left: 0em;
+    animation-name: side-button-hide;
+    animation-duration: 3s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+}
+
+.side-button-show {
+    transition: left 2s;
+    left: 0em;
+}
+.side-button:hover {
+    left: -10em;
+}
+
+.side-button a {
+    color: white;
+}
+@keyframes side-button-hide {
+    // from {
+    //     left: -10px;
+    //     top: 0px;
+    // }
+    to {
+        left: 0em;
+        top: 0px;
+    }
+}
+
+.is-fullheight-100vh {
+    height: 100vh;
+}
+
+
+.header-container {
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+}
+
+.center-recaptcha {
+    margin: auto;
+    max-width: 305px;
+}
+
+.is-primary-gradient {
+    background-image: linear-gradient(141deg, #063172 0%, #0d6efd 71%, #0d6efd 100%);
+}
+
+.hero_main_image {
+    background-image: url("./static/images/szkolenia-bg.jpg");
+    background-size: cover;
+}
+
+.hero_bbmain_image {
+    background-image: url("./static/images/BB_hero.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+@include mobile {
+    .p-responsive {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+    .userAccount .tabs a {
+        padding: 0.4em 1.3em;
+    }
+    .tabs a {
+        padding: 0.4em 0.5em;
+    }
+}
+
+.userAccount .tabs a {
+    color: $main;
+}
+
+/* tytuł produktu w sklepie */
+.product-title {
+    font-weight: 550;
+    line-height: 1.125;
+    font-size: 1.8rem;
+    color: black;
+}
+.modal_title_width {
+    max-width: 560px;
+}
+@include mobile {
+    .product-title {
+        font-size: 1.55rem;
+    }
+    .modal_title_width {
+        max-width: calc(100vw - 60px);
+    }
+}
+.modal_delete_button {
+    line-height: 3em;
+}

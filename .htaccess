@@ -1,0 +1,17 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^biegbelfrow.pl$ 
+RewriteRule ^(.*)$ https://biegbelfrow.pl/bb [R,L]
+
+RewriteCond %{REQUEST_URI} ^/ankieta
+RewriteRule ^(.*)$ https://odnrewers.pl/szkolenia/$1 [R,L]
+
+RewriteCond %{REQUEST_URI} ^/aktywacja
+RewriteRule ^(.*)$ https://odnrewers.pl/szkolenia/$1 [R,L]
+
+RewriteCond %{REQUEST_URI} ^/passwd
+RewriteRule ^(.*)$ https://odnrewers.pl/szkolenia/$1 [R,L]
+
+RewriteCond %{REQUEST_URI} ^/kupon
+RewriteRule ^(.*)$ https://odnrewers.pl/szkolenia/$1 [R,L]
