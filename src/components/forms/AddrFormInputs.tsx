@@ -1,3 +1,4 @@
+import React from "react";
 import { Input } from "./Input";
 import { IAddr } from "../../interfaces/IAddr";
 
@@ -128,7 +129,7 @@ export const AddrFormInputs = (props: IAddrFormInputs) => {
             break;
     }
 
-    return <>{fields.map((field) => showInputField(field))}</>;
+    return <>{fields.map((field) => <React.Fragment key={props.prefixName + field}>{showInputField(field)}</React.Fragment>)}</>;
 
     function showInputField(field: AddrInputFields) {
         if (props.data == undefined) return;

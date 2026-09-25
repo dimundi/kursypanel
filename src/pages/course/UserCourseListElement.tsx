@@ -6,7 +6,7 @@ import HelperClass from "../../classes/HelperClass";
 import { IUserCourse } from "../../interfaces/IUserCourse";
 import ProdType from "../products/ProdType";
 import UserCourseStartButton from "./UserCourseStartButton";
-import { COURSE_TYPES_CHOICES, DATE_FORMAT_CHOICES, ORDER_STATUS_CHOICES } from "../../components/Enumerators";
+import { COURSE_TYPES_CHOICES, DATE_FORMAT_CHOICES } from "../../components/Enumerators";
 import ProdTerm from "../products/ProdTerm";
 import ProdDuration from "../products/ProdDuration";
 import OrderStatus from "../order/OrderStatus";
@@ -51,15 +51,6 @@ const UserCoursesListElement = (props: { course?: IUserCourse; index: number }) 
                     <span className="tag is-light">W sprawach organizacyjnych będziemy kontaktować się mailowo.</span>
                 )}
 
-                {props.course?.status !== ORDER_STATUS_CHOICES.ORDER_PAID && (
-                    <div>
-                        <div className="course-card-order-number">
-                            numer zamówienia: <b>{props.course?.orderId}</b>
-                        </div>
-                        <div className="course-card-labels"><OrderStatus status={props.course?.status} paymentSys={props.course?.paymentSys} /></div>
-                    </div>
-                )}
-
                 <div className="is-size-6 course-card-actions">
                     <nav className="level">
                         <div className="level-left">
@@ -83,6 +74,16 @@ const UserCoursesListElement = (props: { course?: IUserCourse; index: number }) 
                 {showMore && (
                     <div className="is-size-7">
                         <hr />
+                        {props.course?.orderId != null && (
+                            <div className="course-card-order-number">
+                                Numer zamówienia: <b>{props.course.orderId}</b>
+                            </div>
+                        )}
+                        {props.course?.status != null && (
+                            <div className="course-card-labels mb-3">
+                                <OrderStatus status={props.course.status} paymentSys={props.course.paymentSys} />
+                            </div>
+                        )}
                         {props.course?.progress?.started && (
                             <div>
                                 kurs rozpocząłeś:{" "}

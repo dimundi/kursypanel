@@ -8,11 +8,15 @@ import { useUserAccountContext } from "../../context/UserAccountContext";
 import IReqOptions from "../../interfaces/IReqOptions";
 import SubmitButton from "../../components/forms/SubmitButton";
 import { isMobile } from "react-device-detect";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const UserData = () => {
     const { user, setUser } = useContext(UserContext);
     const { userData, setNotification, setIsUserDataRead } = useUserAccountContext();
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const returnTo = searchParams.get("returnTo");
 
     const {
         register,
@@ -34,6 +38,9 @@ const UserData = () => {
                 setIsUserDataRead(false);
             }
             setIsSubmitted(false);
+            if (returnTo && returnTo.startsWith("/") && !returnTo.startsWith("//")) {
+                navigate(returnTo);
+            }
         };
         var requestOptions: IReqOptions = {
             method: "POST",

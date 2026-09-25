@@ -160,6 +160,9 @@ export default function TestBlock(props: { test?: ITest; successNotification?: J
                 if (props.successNotification) {
                     setTestNotification(props.successNotification);
                 } else setTestNotification(<Notification type="success">Dziękujemy za wypełnienie ankiety.</Notification>);
+                if (!urlParams.kod) {
+                    setActiveTab?.("certyfikat");
+                }
             }
             setIsSubmitted(false);
         };
@@ -280,6 +283,17 @@ export default function TestBlock(props: { test?: ITest; successNotification?: J
             {showQ && (
                 <>
                     <div className="survey-intro"><HTMLCode>{props.test?.txt}</HTMLCode></div>
+                    {isSurvey() && (
+                        <div className="survey-scale-guide" aria-label="Skala ocen ankiety">
+                            <span>Oceń w skali</span>
+                            <span className="survey-scale-guide-buttons" aria-hidden="true">
+                                <span>1</span>
+                                <span className="survey-scale-guide-dots">...</span>
+                                <span>5</span>
+                            </span>
+                            <span>1 - źle, 5 - bardzo dobrze</span>
+                        </div>
+                    )}
                     {props.test?.q?.map((q, index) => (
                         <TestQ key={index} testq={q} index={index} register={register} error={errors} />
                     ))}

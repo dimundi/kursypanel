@@ -10,7 +10,7 @@ export default function UserCert(props: { cert?: IUserCert }) {
 
     /* certyfikat istnieje */
     if (props.cert?.status === CERT_STATUS_CHOICES.CERT_STATUS_EXISTS) {
-        return <CertListItem cert={props.cert} />;
+        return <CertListItem cert={props.cert} variant="account" />;
     }
 
     /* certyfikatu nie wystawiamy! */

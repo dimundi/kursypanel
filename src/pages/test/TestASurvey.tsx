@@ -4,19 +4,17 @@ import { UseFormRegister, FieldValues } from "react-hook-form";
 
 export default function TestASurvey(props: { id: string; register: UseFormRegister<FieldValues> }) {
     return (
-        <>
-            <div className="custom-radios">
-                <TestASurveyEl id={props.id} no="1" register={props.register} />
+        <div className="custom-radios">
+            <TestASurveyEl id={props.id} no="1" register={props.register} />
 
-                <TestASurveyEl id={props.id} no="2" register={props.register} />
+            <TestASurveyEl id={props.id} no="2" register={props.register} />
 
-                <TestASurveyEl id={props.id} no="3" register={props.register} />
+            <TestASurveyEl id={props.id} no="3" register={props.register} />
 
-                <TestASurveyEl id={props.id} no="4" register={props.register} />
+            <TestASurveyEl id={props.id} no="4" register={props.register} />
 
-                <TestASurveyEl id={props.id} no="5" register={props.register} />
-            </div>
-        </>
+            <TestASurveyEl id={props.id} no="5" register={props.register} />
+        </div>
     );
 }
 

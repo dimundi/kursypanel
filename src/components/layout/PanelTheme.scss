@@ -327,6 +327,11 @@
     .course-certificate-content > :first-child { margin-top: 0 !important; }
     .button { max-width: 100%; white-space: normal; text-align: center; }
 }
+.training-panel .course-certificate-tab.is-ready {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    .course-certificate-content { padding-left: 0; border-left: 0; }
+}
 @media (max-width: 700px) {
     .training-panel .course-certificate-tab {
         grid-template-columns: minmax(0, 1fr);
@@ -343,6 +348,19 @@
     .survey-title { margin: 0 0 16px !important; font-size: 24px !important; }
     .survey-intro { padding: 20px 24px; margin-bottom: 24px; border-radius: 14px; background: #edf5ff; color: #43546c; font-size: 14px; line-height: 1.8; }
     .survey-intro p:last-child { margin-bottom: 0; }
+    .survey-scale-guide {
+        display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+        margin: -6px 0 18px; color: #31415a; font-size: 14px; font-weight: 500;
+    }
+    .survey-scale-guide-buttons { display: inline-flex; gap: 6px; }
+    .survey-scale-guide-buttons span {
+        display: grid; place-items: center; width: 32px; height: 32px;
+        border: 1px solid #cbd9ec; border-radius: 9px;
+        background: #f5f9ff; color: #203b8f; font-size: 13px;
+    }
+    .survey-scale-guide-buttons .survey-scale-guide-dots {
+        width: 34px; color: #687182; letter-spacing: 1px;
+    }
     .survey-question { padding: 20px 0; border-top: 1px solid #edf0f5; }
     .survey-question-title { font-size: 16px; font-weight: 500; margin-bottom: 14px !important; }
     .survey-question > .mb-5 { margin-bottom: 0 !important; }
@@ -374,3 +392,70 @@
 }
 .training-panel a.course-card-image { display: block; cursor: pointer; }
 .training-panel a.course-card-image:focus-visible { outline-offset: -3px; }
+.training-panel .account-cert-list { display: grid; gap: 14px; }
+.training-panel .account-empty-state {
+    padding: 22px 24px; border: 1px solid #d7e3f2; border-radius: 16px;
+    background: #f8fbff; color: #43546c;
+}
+.training-panel .account-cert-card {
+    display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: center; gap: 18px;
+    padding: 18px 20px; border: 1px solid #d7e3f2; border-radius: 18px;
+    background: #fff; box-shadow: 0 8px 24px rgba(31, 64, 112, 0.06);
+}
+.training-panel .account-cert-card-icon {
+    display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px;
+    background: #edf5ff; color: #0075f6; font-size: 22px;
+}
+.training-panel .account-cert-card-content { min-width: 0; }
+.training-panel .account-cert-card h3 {
+    margin: 0 0 6px; font-size: 18px; line-height: 1.35; font-weight: 700;
+}
+.training-panel .account-cert-card-meta { color: #687182; font-size: 14px; }
+.training-panel .account-cert-card-action { white-space: nowrap; }
+.training-panel .course-certificate .account-cert-card {
+    width: 100%; box-shadow: none; border-color: #d4e3f5; background: #fff;
+}
+.training-panel .account-order-list { display: grid; gap: 14px; }
+.training-panel .account-order-card {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: start;
+    padding: 20px; border: 1px solid #d7e3f2; border-radius: 18px; background: #fff;
+    box-shadow: 0 8px 24px rgba(31, 64, 112, 0.06);
+}
+.training-panel .account-order-header {
+    display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; margin-bottom: 14px;
+}
+.training-panel .account-order-eyebrow {
+    color: #687182; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px;
+}
+.training-panel .account-order-card h3 { margin: 0; font-size: 18px; line-height: 1.35; }
+.training-panel .account-order-card h3 span { color: #687182; font-size: 14px; font-weight: 500; }
+.training-panel .account-order-summary {
+    flex-shrink: 0; padding: 8px 12px; border-radius: 999px; background: #edf5ff; color: #0c4e98; font-weight: 700;
+}
+.training-panel .account-order-meta { display: grid; gap: 8px; color: #31415a; }
+.training-panel .account-order-meta > div { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.training-panel .account-order-meta > div > span:first-child { color: #687182; min-width: 92px; }
+.training-panel .account-order-toggle {
+    display: inline-flex; align-items: center; gap: 8px; justify-content: center;
+    min-width: 118px; min-height: 44px; padding: 10px 16px; border: 1px solid #bed5f2;
+    border-radius: 999px; background: white; color: #0063d1; font: inherit; font-weight: 600; cursor: pointer;
+}
+.training-panel .account-order-toggle:hover { background: #edf5ff; border-color: #0075f6; }
+.training-panel .account-order-products {
+    display: grid; gap: 10px; margin-top: 18px; padding-top: 16px; border-top: 1px solid #edf0f5;
+}
+.training-panel .account-order-product {
+    display: flex; justify-content: space-between; gap: 16px; padding: 12px 14px;
+    border: 1px solid #e3e9f1; border-radius: 14px; background: #f8fbff;
+}
+.training-panel .account-order-product-type { margin-top: 4px; color: #687182; font-size: 13px; }
+.training-panel .account-order-product-values { display: flex; align-items: center; gap: 12px; color: #31415a; white-space: nowrap; }
+@media (max-width: 700px) {
+    .training-panel .account-cert-card { grid-template-columns: 44px minmax(0, 1fr); }
+    .training-panel .account-cert-card-action { grid-column: 1 / -1; justify-self: start; }
+    .training-panel .account-order-card { grid-template-columns: minmax(0, 1fr); }
+    .training-panel .account-order-toggle { justify-self: start; }
+    .training-panel .account-order-header, .training-panel .account-order-product { flex-direction: column; }
+    .training-panel .account-order-summary { align-self: flex-start; }
+    .training-panel .account-order-product-values { flex-wrap: wrap; white-space: normal; }
+}

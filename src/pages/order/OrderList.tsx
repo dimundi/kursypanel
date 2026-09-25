@@ -12,15 +12,13 @@ const OrderList = () => {
                 <>
                     {isMobile && <div className="mb-3 has-text-weight-bold">Twoje zamówienia</div>}
                     {orders?.length === 0 ? (
-                        <div>Nie masz jeszcze zamówień.</div>
+                        <div className="account-empty-state">Nie masz jeszcze zamówień.</div>
                     ) : (
-                        <>
-                            <div className="list has-visible-pointer-controls">
-                                {orders?.map((order) => (
-                                    <OrderListItem key={order.orderId} order={order} />
-                                ))}
-                            </div>
-                        </>
+                        <div className="account-order-list">
+                            {orders?.map((order) => (
+                                <OrderListItem key={order.orderId} order={order} />
+                            ))}
+                        </div>
                     )}
                 </>
             </UserDataContainer>

@@ -24,9 +24,7 @@ export default function Lesson() {
                 ) : (
                     <>
                         {lesson?.blocks?.map((block, index) => (
-                            <>
-                                <LessonBlockItem block={block} key={"block_" + index} />
-                            </>
+                            <LessonBlockItem block={block} key={"block_" + index} />
                         ))}
 
                         {lesson?.prevId !== undefined && lesson?.prevId > 0 && (

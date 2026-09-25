@@ -5,12 +5,27 @@ import RequestClass from "../../classes/RequestClass";
 import { useUserCourseContext } from "../../context/UserCourseContext";
 import { faArrowRight, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { IUserCert } from "../../interfaces/ICertification";
+import { CERT_STATUS_CHOICES, GENDER_USER_CHOICES } from "../../components/Enumerators";
+import CertListItem from "./CertListItem";
 
 export default function CreateCerButton(props: { cert?: IUserCert; className?: string }) {
     const [notification, setNotification] = useState<JSX.Element | String>();
+    const [generatedCert, setGeneratedCert] = useState<IUserCert>();
     const { setIsUserCourseRead } = useUserCourseContext();
+    const location = useLocation();
+    const userDataReturnUrl = "/konto/osobowe?returnTo=" + encodeURIComponent(location.pathname + location.search);
+
+    function getGenderLabel() {
+        if (props.cert?.gender === GENDER_USER_CHOICES.GENDER_FEMALE) {
+            return "Pani";
+        }
+        if (props.cert?.gender === GENDER_USER_CHOICES.GENDER_MALE) {
+            return "Pan";
+        }
+        return "brak";
+    }
 
     const [content, setContent] = useState<JSX.Element | String>(
         <button className={"p-2 button is-accent " + props.className} onClick={() => checkUserName()}>
@@ -23,7 +38,10 @@ export default function CreateCerButton(props: { cert?: IUserCert; className?: s
             <>
                 <div className="mt-3 is-size-5">Proszę zweryfikuj dane, które pojawią się na certyfikacie</div>
                 <div className="mt-3">
-                    Imię i nazwisko: <b>{props.cert?.userName}</b> <Link to="/konto/osobowe">(zmień)</Link>
+                    Forma grzecznościowa: <b>{getGenderLabel()}</b> <Link to={userDataReturnUrl}>(zmień)</Link>
+                </div>
+                <div className="mt-2">
+                    Imię i nazwisko: <b>{props.cert?.userName}</b> <Link to={userDataReturnUrl}>(zmień)</Link>
                 </div>
                 <div className="mb-3">
                     <button className={"p-2 button is-accent " + props.className} onClick={() => action()}>
@@ -42,6 +60,12 @@ export default function CreateCerButton(props: { cert?: IUserCert; className?: s
         };
 
         function succ_callback(result: any) {
+            setGeneratedCert({
+                ...props.cert,
+                fileUrl: result.cert,
+                status: CERT_STATUS_CHOICES.CERT_STATUS_EXISTS,
+                created: Math.floor(Date.now() / 1000),
+            });
             if (setNotification)
                 setNotification(
                     RequestClass.succAlert(
@@ -74,6 +98,9 @@ export default function CreateCerButton(props: { cert?: IUserCert; className?: s
 
     if (props.cert?.productId === null) {
         return <></>;
+    }
+    if (generatedCert) {
+        return <CertListItem cert={generatedCert} variant="account" />;
     }
     return (
         <>

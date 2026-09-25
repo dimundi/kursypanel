@@ -7,9 +7,11 @@ import UserCert from "../certificate/UserCert";
 
 export default function CourseCertificate() {
     const { userCourse } = useUserCourseContext();
+    const certExists = userCourse?.cert?.status === CERT_STATUS_CHOICES.CERT_STATUS_EXISTS;
+
     return (
         <CourseContainer apiCoursesRequired={true} noPadding={true}>
-            <section className="course-certificate course-certificate-tab" aria-labelledby="course-certificate-title">
+            <section className={"course-certificate course-certificate-tab" + (certExists ? " is-ready" : "")} aria-labelledby="course-certificate-title">
                 <div className="course-certificate-heading">
                 <span className="course-certificate-icon" aria-hidden="true"><FontAwesomeIcon icon={faCertificate} /></span>
                 <h2 id="course-certificate-title">Twój certyfikat</h2>

@@ -1,4 +1,4 @@
-import { CERT_STATUS_CHOICES, TEST_TYPE_CHOICES } from "../components/Enumerators";
+import { CERT_STATUS_CHOICES, GENDER_USER_CHOICES, TEST_TYPE_CHOICES } from "../components/Enumerators";
 
 /* struktura danych certyfikatu API*/
 /* CZY TO JEST POTRZENE ? */
@@ -17,6 +17,7 @@ export interface IUserCert {
     cName?: string; // nazwa kursu
     status?: CERT_STATUS_CHOICES;
     userName?: string;
+    gender?: GENDER_USER_CHOICES;
     conditions?: ICertCond[]; // warunki uzyskania certyfikatu, które nie zostały jeszcze spełnione
 }
 
