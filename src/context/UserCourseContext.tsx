@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, createContext, useContext } from "react";
 import { ILesson, IUserCourse } from "../interfaces/IUserCourse";
 
-export type courseTabType = "spis_tresci" | "lekcja" | "lista_kursow" | "ankieta";
+export type courseTabType = "spis_tresci" | "lekcja" | "lista_kursow" | "ankieta" | "certyfikat";
 export type UserCourseContextType = {
     userCourse?: IUserCourse;
     setUserCourse?: Dispatch<SetStateAction<IUserCourse>>;

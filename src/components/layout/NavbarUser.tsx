@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import RequestClass from "../../classes/RequestClass";
@@ -12,17 +12,18 @@ export interface INavbarUser {
 }
 
 export const NavbarUser = (props: INavbarUser) => {
-    const { isLogged, setIsLogged, user, setUser } = useContext(UserContext);
+    const { isLogged, setIsLogged, user, setUser, setUserName } = useContext(UserContext);
     const [open, setOpen] = useState(false);
     const container = useRef<HTMLDivElement>(null);
     const trigger = useRef<HTMLButtonElement>(null);
     const location = useLocation();
+    const navigate = useNavigate();
     const initials = [user.first_name, user.last_name].map(name => name?.trim().charAt(0) || "").join("").toLocaleUpperCase("pl");
     useEffect(() => { setOpen(false); }, [location.pathname, isLogged]);
     useEffect(() => {
         if (!isLogged) return;
         let active = true;
-        RequestClass.makeRequest("usr/", null, (result: any) => {
+        RequestClass.readShared("usr/", (result: any) => {
             if (active) setUser(result);
         }, () => {});
         return () => { active = false; };
@@ -44,22 +45,17 @@ export const NavbarUser = (props: INavbarUser) => {
     }, [open]);
 
     const handleLogoutBtn = () => {
-        const succ_callback = () => {
-            sessionStorage.setItem("access_token", "");
+        const finishLogout = () => {
+            RequestClass.clearTokens();
+            setUser({});
+            setUserName("");
             setIsLogged(false);
+            setOpen(false);
+            navigate("/login", { replace: true });
         };
 
-        const err_callback = () => {
-            sessionStorage.setItem("access_token", "");
-            setIsLogged(false);
-            //setNotification(RequestClass.errorAlert(result));
-            // if (setIsUserInfoRead)
-            //     setIsUserInfoRead(true)
-        };
-
-        RequestClass.makeRequest("logout/", null, succ_callback, err_callback);
+        RequestClass.makeRequest("logout/", null, finishLogout, finishLogout);
     };
-
     const basket = props.basketCnt !== undefined && props.basketCnt > 0 ? (
         <Link to="/koszyk" reloadDocument title="Koszyk" className="button px-2 py-1">
             <FontAwesomeIcon icon={faCartShopping} />&nbsp;{props.basketCnt}

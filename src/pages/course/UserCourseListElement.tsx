@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookOpen, faArrowRight, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
@@ -16,16 +17,21 @@ const UserCoursesListElement = (props: { course?: IUserCourse; index: number }) 
     const [failedImage, setFailedImage] = useState<string>();
     const image = props.course?.prodDef?.img;
     const title = props.course?.product?.pName || props.course?.prodDef?.name || "Szkolenie";
+    const canOpen = HelperClass.courseIsValid(props.course) && HelperClass.isEkurs(props.course?.product) && !!props.course?.product?.productId;
+    const cover = image && image !== failedImage ? (
+        <img src={image} alt="" loading="lazy" onError={() => setFailedImage(image)} />
+    ) : (
+        <div className="course-card-placeholder" aria-hidden="true"><FontAwesomeIcon icon={faBookOpen} /></div>
+    );
     return (
         <>
             <article className="course-card">
-                <div className="course-card-image">
-                    {image && image !== failedImage ? (
-                        <img src={image} alt="" loading="lazy" onError={() => setFailedImage(image)} />
-                    ) : (
-                        <div className="course-card-placeholder" aria-hidden="true"><FontAwesomeIcon icon={faBookOpen} /></div>
-                    )}
-                </div>
+                {canOpen ? (
+                    <Link className="course-card-image" to={"/kursy/" + props.course?.product?.productId}
+                        aria-label={(props.course?.progress?.started ? "Kontynuuj kurs: " : "Rozpocznij kurs: ") + title}>
+                        {cover}
+                    </Link>
+                ) : <div className="course-card-image">{cover}</div>}
                 <div className="course-card-body">
                 <div className="course-card-type">
                     <ProdType prodType={props.course?.product?.prodType} courseType={props.course?.product?.courseType} />

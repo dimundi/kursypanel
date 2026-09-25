@@ -94,7 +94,7 @@ export default function Survey(props: { surveyCert: ISurveyCert }) {
         }
         return (
             <Notification type="success">
-                Dziękujemy za wypełnienie ankiety. <br></br>Sprawdź w zakładce Spis Treści, czy możesz już wygenerować certyfikat.
+                Dziękujemy za wypełnienie ankiety. <br></br>Sprawdź w zakładce Certyfikat, czy możesz już wygenerować certyfikat.
             </Notification>
         );
     }

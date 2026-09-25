@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom";
 import { ReactNode, useEffect, useState } from "react";
 import { useUserCourseContext } from "../../context/UserCourseContext";
 import RequestClass from "../../classes/RequestClass";
@@ -32,6 +33,7 @@ export default function CourseContainer(props: {
     } = useUserCourseContext();
 
     const [step, setStep] = useState(1);
+    const [search] = useSearchParams();
 
     /* -------------------------------------------
      *   obsługa zapytań
@@ -42,71 +44,40 @@ export default function CourseContainer(props: {
     };
 
     useEffect(() => {
-        /* -------------------------------------------
-         *   zapytanie o konkretny kurs
-         * ------------------------------------------- */
-        if (props.apiCoursesRequired === true) {
-            const succ_callback = (result: any) => {
-                if (setUserCourse) {
-                    setUserCourse(result.courses);
-                }
-                if (setIsUserCourseRead) {
-                    setIsUserCourseRead(true);
-                }
+        let current = true;
+        setStep(1);
+        const fail = (result: any) => { if (current) err_callback(result); };
+        const requestLesson = () => {
+            RequestClass.readShared("course/" + productId + "/lesson/" + lessonId + "/", (result: any) => {
+                if (!current) return;
+                setLesson?.(result.lesson);
+                setLessonIdRead?.(Number(result.lesson.lessonId));
                 setStep(2);
-            };
-
-            if (productId > 0 && (isUserCourseRead === false || (productId > 0 && productId !== userCourse?.product?.productId))) {
-                RequestClass.makeRequest("course/" + productId + "/", null, succ_callback, err_callback);
+            }, fail);
+        };
+        if (props.apiCoursesRequired || props.apiLessonRequired) {
+            if (isUserCourseRead && userCourse?.product?.productId === productId) {
+                if (props.apiLessonRequired) requestLesson();
+                else setStep(2);
             } else {
-                setStep(2);
+                RequestClass.readShared("course/" + productId + "/", (result: any) => {
+                    if (!current) return;
+                    setUserCourse?.(result.courses);
+                    setIsUserCourseRead?.(true);
+                    // Kolejny efekt pobierze lekcję po zmianie isUserCourseRead.
+                    if (!props.apiLessonRequired) setStep(2);
+                }, fail);
             }
-        } else if (props.apiLessonRequired === true) {
-            /* -------------------------------------------
-             *   zapytanie o konkretną lekcję
-             * ------------------------------------------- */
-            const succ_callback = (result: any) => {
-                let lessonIdRead = parseInt(result.lesson.lessonId);
-                if (setLesson && setLessonIdRead && lessonIdRead > 0) {
-                    userCourse?.course?.lessons?.forEach((lesson, index) => {
-                        if (lesson.lessonId === lessonIdRead) {
-                            setLesson(result.lesson);
-                            setLessonIdRead(lessonIdRead);
-                        }
-                    });
-                }
+        } else if (props.apIUserCoursesRequired && !isCoursesRead) {
+            RequestClass.readShared("usr/courses/", (result: any) => {
+                if (!current) return;
+                setCourses?.(result.courses);
+                setIsCoursesRead?.(true);
                 setStep(2);
-            };
-
-            // console.log(lessonIdRead)
-            // console.log(lessonId)
-            if (lessonIdRead <= 0 || lessonId !== lessonIdRead) {
-                RequestClass.makeRequest("course/" + productId + "/lesson/" + lessonId + "/", null, succ_callback, err_callback);
-            } else setStep(2);
-        } else {
-            /* -------------------------------------------
-             *   zapytanie o wszystkie kursy
-             * ------------------------------------------- */
-            if (props.apIUserCoursesRequired === true) {
-                const succ_callback = (result: any) => {
-                    if (setCourses) {
-                        setCourses(result.courses);
-                    }
-                    if (setIsCoursesRead) {
-                        setIsCoursesRead(true);
-                    }
-                    setStep(2);
-                };
-
-                if (isCoursesRead === false) {
-                    RequestClass.makeRequest("usr/courses/", null, succ_callback, err_callback);
-                } else setStep(2);
-            } else {
-                setStep(2);
-            }
-        }
-    }, [step, lessonId]);
-
+            }, fail);
+        } else setStep(2);
+        return () => { current = false; };
+    }, [productId, lessonId, props.apiCoursesRequired, props.apiLessonRequired, props.apIUserCoursesRequired, isUserCourseRead]);
     useEffect(() => {
         /* zmiany w momencie przełączania tabów  */
         if (setNotification) {
@@ -114,7 +85,7 @@ export default function CourseContainer(props: {
         }
     }, [activeTab]);
 
-    let title = "Moje kursy";
+    let title = search.get("widok") === "lista" ? "Lista kursów" : "Moje kursy";
     if (productId > 0 && activeTab !== "lista_kursow") {
         // subtitle="Realizujesz kurs"
         if (userCourse?.product?.pName) title = userCourse?.product?.pName;
@@ -124,11 +95,11 @@ export default function CourseContainer(props: {
             {/* productId: {productId}, lekcja: {lessonId} */}
             <PageTitle><h1>{title}</h1></PageTitle>
 
-            {activeTab !== "lista_kursow" && <BodyContainer noPadding={true} className="mb-2">
+            {(activeTab !== "lista_kursow" || search.get("widok") === "lista") && <BodyContainer noPadding={true} className="mb-2">
                 <div className="tabs">
                     <ul>
                         {/* <li className={activeTab==="kursy" ? "is-active":""}><a onClick={() => {setActiveTab("kursy")}}>Twoje kursy</a></li> */}
-                        <li>
+                        <li className={activeTab === "lista_kursow" ? "is-active" : ""}>
                             <a
                                 onClick={() => {
                                     if (setActiveTab) setActiveTab("lista_kursow");
@@ -157,6 +128,11 @@ export default function CourseContainer(props: {
                                 >
                                     Lekcja
                                 </a>
+                            </li>
+                        )}
+                        {productId > 0 && (
+                            <li className={activeTab === "certyfikat" ? "is-active" : ""}>
+                                <a onClick={() => setActiveTab?.("certyfikat")}>Certyfikat</a>
                             </li>
                         )}
                         {activeTab === "ankieta" && (

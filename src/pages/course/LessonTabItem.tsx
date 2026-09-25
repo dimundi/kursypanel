@@ -10,7 +10,7 @@ export default function LessonTabItem(props: { lesson?: ILesson; index?: number 
             onClick={() => {
                 if (props.lesson?.lessonId === undefined) return;
                 setLessonId?.(props.lesson.lessonId);
-                setActiveTab?.("lekcja");
+
             }}>
             <span className="course-lesson-number" aria-hidden="true">{String((props.index ?? 0) + 1).padStart(2, "0")}</span>
             <span className="course-lesson-name">{props.lesson?.name}</span>

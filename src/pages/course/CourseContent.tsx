@@ -1,15 +1,25 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCertificate } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
+
 import { Notification } from "../../components/Notification";
 import { useUserCourseContext } from "../../context/UserCourseContext";
 import CourseContainer from "./CourseContainer";
 import LessonTabItem from "./LessonTabItem";
-import UserCert from "../certificate/UserCert";
-import { CERT_STATUS_CHOICES } from "../../components/Enumerators";
+
+
 
 export default function CourseContent() {
-    const { userCourse } = useUserCourseContext();
+    const { userCourse, productId, isUserCourseRead } = useUserCourseContext();
     const lessons = userCourse?.course?.lessons || [];
+    const navigate = useNavigate();
+    const [search] = useSearchParams();
+    useEffect(() => {
+        if (search.get("widok") !== "start" || !isUserCourseRead) return;
+        const target = lessons.find(item => item.lessonId === userCourse?.progress?.lessonId) || lessons[0];
+        // Zastąp adres przejściowy, by Wstecz wracało bezpośrednio do listy.
+        navigate("/kursy/" + productId + (target?.lessonId ? "/" + target.lessonId : ""), { replace: true });
+    }, [isUserCourseRead, userCourse, productId, search, navigate]);
     return (
         <CourseContainer apiCoursesRequired={true} noPadding={true}>
             <div className="course-overview">
@@ -29,13 +39,7 @@ export default function CourseContent() {
                         </ol>
                     )}
                 </section>
-                {userCourse?.cert && userCourse.cert.status !== CERT_STATUS_CHOICES.CERT_STATUS_NOT_AVAILABLE && (
-                    <section className="course-certificate" aria-labelledby="course-certificate-title">
-                        <span className="course-certificate-icon" aria-hidden="true"><FontAwesomeIcon icon={faCertificate} /></span>
-                        <h2 id="course-certificate-title">Twój certyfikat</h2>
-                        <UserCert cert={userCourse.cert} />
-                    </section>
-                )}
+
             </div>
         </CourseContainer>
     );

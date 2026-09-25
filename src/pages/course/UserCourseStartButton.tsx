@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 /* przycisk rozpoczęcia, albo kontynuowania kursu użytkownika */
 import HelperClass from "../../classes/HelperClass";
 import { IUserCourse } from "../../interfaces/IUserCourse";
@@ -6,7 +7,7 @@ import { useUserCourseContext } from "../../context/UserCourseContext";
 const UserCourseStartButton = (props:{course?:IUserCourse, className?:string}) =>  {
 
 
-    const {setActiveTab, setProductId} = useUserCourseContext() 
+    const navigate = useNavigate(); 
 
     if ( HelperClass.courseIsValid(props.course) === false) {
         return (
@@ -20,14 +21,7 @@ const UserCourseStartButton = (props:{course?:IUserCourse, className?:string}) =
         return (
             <>
             <a onClick={() => {
-                    if (setProductId) {
-                        if (props.course?.product?.productId) {
-                            setProductId(props.course?.product?.productId);                         
-                            if (setActiveTab) {
-                                    setActiveTab('spis_tresci'); 
-                            }
-                        }
-                    }
+                    if (props.course?.product?.productId) navigate("/kursy/" + props.course.product.productId);
                     return false;
                     }} className={props.className+` mt-2 button is-primary is-light`}> 
             

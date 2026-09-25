@@ -6,6 +6,32 @@ import { ReactElement } from "react";
 import { EMAIL_BIURO } from "../components/Enumerators";
 
 export default class RequestClass {
+    private static pendingReads = new Map<string, Promise<{ data?: any; error?: any }>>();
+
+    // Tylko jawnie wybrane odczyty. Nie łączymy operacji zapisujących, np. generowania certyfikatu.
+    public static readShared(
+        path: string,
+        success: (data: any) => void,
+        failure: (error: any) => void
+    ) {
+        const key = JSON.stringify([process.env.REACT_APP_API_URL, RequestClass.getToken(), path]);
+        let pending = RequestClass.pendingReads.get(key);
+        if (!pending) {
+            pending = new Promise(resolve => {
+                RequestClass.makeRequest(path, null,
+                    data => resolve({ data }),
+                    error => resolve({ error }));
+            });
+            RequestClass.pendingReads.set(key, pending);
+            // Brak cache po zakończeniu: kolejny odczyt pobiera aktualne dane.
+            void pending.then(() => RequestClass.pendingReads.delete(key));
+        }
+        return pending.then(result => {
+            if (result.error !== undefined) failure(result.error);
+            else success(result.data);
+        });
+    }
+
     /*  funkcja statyczna zwraca token
      */
     public static getToken() {

@@ -77,11 +77,11 @@ export default function TestQ(props: {
     }
 
     return (
-        <>
-            <HTMLCode className="mb-0 mb-4">
+        <div className="survey-question">
+            <HTMLCode className="survey-question-title mb-4">
                 {HelperClass.addUndefined(props.index, 1) + ". " + HelperClass.cleanMainParagraph(props.testq?.txt)}
             </HTMLCode>
             <div className="mb-5">{q}</div>
-        </>
+        </div>
     );
 }

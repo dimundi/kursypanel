@@ -274,12 +274,12 @@ export default function TestBlock(props: { test?: ITest; successNotification?: J
      * step 2: wyśiwetla komunikat, że udało się zapisać i przycisk zakończ
      * ----------------------------------------------------------------------*/
     return (
-        <div className="mb-6">
-            <div className="is-size-4 mt-4">{isSurvey() ? <>Ankieta</> : <>{props.test?.name}</>}</div>
+        <div className={isSurvey() ? "panel-survey mb-6" : "mb-6"}>
+            <h2 className="survey-title is-size-4 mt-4">{isSurvey() ? <>Ankieta</> : <>{props.test?.name}</>}</h2>
 
             {showQ && (
                 <>
-                    <HTMLCode>{props.test?.txt}</HTMLCode>
+                    <div className="survey-intro"><HTMLCode>{props.test?.txt}</HTMLCode></div>
                     {props.test?.q?.map((q, index) => (
                         <TestQ key={index} testq={q} index={index} register={register} error={errors} />
                     ))}
