@@ -48,21 +48,50 @@ const UserCouponList = () => {
     );
 
     function saveDefault(data: any) {
+        const couponAlreadyUsedHint = (
+            <Notification type="warning" lead="Kupon mógł zostać już zrealizowany.">
+                Jeśli korzystałeś już z tego linku, szkolenie może znajdować się w Twojej bibliotece.
+                <br />
+                Przejdź do <Link to="/kursy">Moje kursy</Link> i sprawdź dostępne szkolenia.
+            </Notification>
+        );
         const err_callback = (result: any) => {
             if (RequestClass.logoutOnError(result)) {
                 setIsLogged(false);
             }
-            if (setNotification) setNotification(RequestClass.errorAlert(result));
+            if (setNotification) {
+                if (result?.errCode === "coupon_m010") {
+                    setNotification(
+                        <>
+                            {RequestClass.errorAlert(result)}
+                            {couponAlreadyUsedHint}
+                        </>
+                    );
+                } else {
+                    setNotification(RequestClass.errorAlert(result));
+                }
+            }
             setIsSubmitted(false);
         };
         const warning_callback = (result: any) => {
-            if (setNotification)
-                setNotification(
-                    <>
-                        {RequestClass.errorAlert(result, true)}
-                        {infoMsg}
-                    </>
-                );
+            if (setNotification) {
+                if (result?.errCode === "coupon_a090") {
+                    setNotification(
+                        <>
+                            {RequestClass.errorAlert(result, true)}
+                            {couponAlreadyUsedHint}
+                            {infoMsg}
+                        </>
+                    );
+                } else {
+                    setNotification(
+                        <>
+                            {RequestClass.errorAlert(result, true)}
+                            {infoMsg}
+                        </>
+                    );
+                }
+            }
             setIsSubmitted(false);
         };
         const succ_callback = (result: ICuponProducts) => {

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faCertificate, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./PasswordToggle.scss";
 import { useForm } from "react-hook-form";
 import { Input } from "../../components/forms/Input";
@@ -31,6 +31,7 @@ export default function Login(props: ILogin) {
     const navigation = useNavigate();
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const isCouponRedirect = urlParams.redirect?.startsWith("kupon_");
     // const captchaRef = useRef<ReCAPTCHA>(null)
 
     /* ----------------------------------------------------------------------*/
@@ -92,6 +93,29 @@ export default function Login(props: ILogin) {
             noImage={props.noImage}
             className={props.className}
             subtitle={props.subtitle}
+            introContent={
+                isCouponRedirect ? (
+                    <>
+                        <h1 className="panel-coupon-heading">
+                            <FontAwesomeIcon icon={faCertificate} aria-hidden="true" />
+                            <span>
+                                Aktywacja
+                                <br />
+                                kuponu
+                            </span>
+                        </h1>
+                        <p>
+                            Kliknąłeś link aktywujący kupon, który uruchomi szkolenie na Twoim koncie. Aby to zrobić, musisz
+                            być zalogowany.
+                            <br />
+                            Jeśli nie masz jeszcze konta,{" "}
+                            <Link to={"/rejestracja/" + urlParams.redirect}>załóż je</Link>
+                            {" "}i kontynuuj rejestrację. Jeśli w trakcie zakładania konta zgubisz kod kuponu, użyj ponownie
+                            linku aktywacyjnego z wiadomości.
+                        </p>
+                    </>
+                ) : props.introContent
+            }
         >
             <div className="has-text-left">
                 <form>

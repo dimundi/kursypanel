@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCertificate } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 
 import { Notification } from "../../components/Notification";
@@ -28,6 +30,7 @@ export default function Register(props: IRegister) {
     if (urlParams.redirect) {
         redirectVal = urlParams.redirect;
     }
+    const isCouponRedirect = redirectVal.startsWith("kupon_");
     /* wyślij zapytanie o dane użytkownika do API */
     const succ_callback = (result: any) => {
         //console.log(result)
@@ -124,6 +127,26 @@ export default function Register(props: IRegister) {
             subtitle={
                 props.subtitle ||
                 "Na podany adres e-mail wyślemy link, który pozwoli kontynuować proces rejestracji."
+            }
+            introContent={
+                isCouponRedirect ? (
+                    <>
+                        <h1 className="panel-coupon-heading">
+                            <FontAwesomeIcon icon={faCertificate} aria-hidden="true" />
+                            <span>
+                                Aktywacja
+                                <br />
+                                kuponu
+                            </span>
+                        </h1>
+                        <p>
+                            Kliknąłeś link aktywujący kupon, który uruchomi szkolenie na Twoim koncie. Aby to zrobić, musisz
+                            mieć konto w platformie.
+                            <br />
+                            Jeśli w trakcie rejestracji zgubisz kod kuponu, użyj ponownie linku aktywacyjnego z wiadomości.
+                        </p>
+                    </>
+                ) : props.introContent
             }
         >
             {formJSC}

@@ -7,6 +7,7 @@ import { SYSTEM_CHOICES } from "../../components/Enumerators";
 export interface IUsrMsgTempl {
     title?: string;
     subtitle?: string;
+    introContent?: ReactNode;
     system?: SYSTEM_CHOICES; // BB - Bieg Belfra
     noImage?: boolean;
     className?: string;
@@ -22,19 +23,20 @@ export default function UsrMsgTempl(props: IUsrMsgTemplFull) {
             <section className="panel-auth" aria-label={props.title || "Konto uczestnika"}>
                 <div className="panel-auth-intro">
                     <span className="panel-eyebrow">PLATFORMA SZKOLENIOWA</span>
-                    <h1>
-                        Twoja przestrzeń
-                        <br />
-                        do nauki.
-                    </h1>
-                    <p>
-                        Szkolenia, materiały i zaświadczenia.
-                        <br />
-                        Wszystko w jednym miejscu.
-                    </p>
-                    <a href="https://odnrewers.pl/" className="panel-back-link">
-                        ← Przejdź do strony Rewers
-                    </a>
+                    {props.introContent || (
+                        <>
+                            <h1>
+                                Twoja przestrzeń
+                                <br />
+                                do nauki.
+                            </h1>
+                            <p>
+                                Szkolenia, materiały i zaświadczenia.
+                                <br />
+                                Wszystko w jednym miejscu.
+                            </p>
+                        </>
+                    )}
                 </div>
                 <div className={"panel-auth-card " + (props.className || "")}>
                     <h2 className="panel-auth-title">{props.title}</h2>
