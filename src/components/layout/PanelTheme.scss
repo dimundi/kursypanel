@@ -82,6 +82,26 @@
     .panel-auth-card .button.is-primary { width: 100%; margin-top: 8px; }
     .panel-auth-card .is-size-6 { font-size: 14px !important; }
     .panel-auth-card .notification { margin-top: 20px; }
+    .order-confirmation { width: min(980px, calc(100% - 48px)); margin: 0 auto; padding: 54px 0 72px; }
+    .order-confirmation-card { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 28px; padding: 36px; background: #fff; border: 1px solid #e3e9f1; border-radius: 24px; box-shadow: 0 18px 45px #243a5a08; }
+    .order-confirmation-icon { display: inline-flex; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 24px; background: #e9f1ff; color: #0075f6; font-size: 32px; }
+    .order-confirmation-eyebrow { margin: 0 0 8px; color: #0063d1; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .order-confirmation h1 { margin: 0; font-size: 32px; font-weight: 500; line-height: 1.25; letter-spacing: -.025em; }
+    .order-confirmation-order { margin: 14px 0 0; color: #31415a; }
+    .order-confirmation-message { margin: 24px 0 0; color: #31415a; line-height: 1.7; }
+    .order-confirmation-transfer { display: grid; gap: 6px; margin-top: 18px; padding: 18px; border: 1px solid #dce8f5; border-radius: 16px; background: #f7fbff; }
+    .order-confirmation-transfer span { color: #687182; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .order-confirmation-transfer strong { color: #0d1726; font-size: 18px; }
+    .order-confirmation-transfer small { color: #687182; line-height: 1.6; }
+    .order-confirmation-action { margin-top: 28px; gap: 10px; }
+    .not-found-page { width: min(980px, calc(100% - 48px)); margin: 0 auto; padding: 54px 0 72px; }
+    .not-found-card { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 28px; padding: 36px; background: #fff; border: 1px solid #e3e9f1; border-radius: 24px; box-shadow: 0 18px 45px #243a5a08; }
+    .not-found-icon { display: inline-flex; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 24px; background: #e9f1ff; color: #0075f6; font-size: 32px; }
+    .not-found-eyebrow { margin: 0 0 8px; color: #0063d1; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .not-found-page h1 { margin: 0; font-size: 32px; font-weight: 500; line-height: 1.25; letter-spacing: -.025em; }
+    .not-found-message { max-width: 620px; margin: 24px 0 0; color: #31415a; line-height: 1.7; }
+    .not-found-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .not-found-actions .button { gap: 10px; }
 
     .is-primary-gradient { background: #e8f3fe; border-radius: 0 0 24px 24px; margin-bottom: 28px; }
     .is-primary-gradient .has-text-white, .is-primary-gradient .has-text-white a { color: #111 !important; }
@@ -146,6 +166,16 @@
         .panel-auth-intro h1 { font-size: 34px; margin: 18px 0 12px; }
         .panel-auth-intro p { margin-bottom: 16px; }
         .panel-auth-card { padding: 24px; border-radius: 20px; }
+        .order-confirmation { width: calc(100% - 32px); padding: 32px 0 48px; }
+        .order-confirmation-card { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 24px; border-radius: 20px; }
+        .order-confirmation-icon { width: 58px; height: 58px; border-radius: 18px; font-size: 26px; }
+        .order-confirmation h1 { font-size: 27px; }
+        .not-found-page { width: calc(100% - 32px); padding: 32px 0 48px; }
+        .not-found-card { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 24px; border-radius: 20px; }
+        .not-found-icon { width: 58px; height: 58px; border-radius: 18px; font-size: 26px; }
+        .not-found-page h1 { font-size: 27px; }
+        .not-found-actions { flex-direction: column; align-items: stretch; }
+        .not-found-actions .button { justify-content: center; }
         .training-content { padding-bottom: 24px; }
         .panel-footer .level-item, .panel-footer .level-item:last-child { justify-content: flex-start; text-align: left; }
         .panel-footer .level-item + .level-item { margin-top: 24px; }

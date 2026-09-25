@@ -1,4 +1,6 @@
 import { Link, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookOpen, faCheckCircle, faUniversity } from "@fortawesome/free-solid-svg-icons";
 import { ADRES_0_BIURO, ADRES_1_BIURO, ADRES_2_BIURO, BANK_ACCOUNT, SYSTEM_CHOICES } from "../components/Enumerators";
 import { IUrlOrderPayment } from "../interfaces/IUrl";
 
@@ -10,52 +12,54 @@ export interface IThankyou {
 
 const Thankyou = (props: IThankyou) => {
     const urlParams = useParams<IUrlOrderPayment>();
+    const isP24 = props.type === "p24";
 
     return (
-        <section className="hero  is-primary is-bold">
-            <div className="hero-body">
-                <div className="container mt-4 mb-4">
-                    <h1 className="title">Dziękujemy za złożenie zamówienia </h1>
-                    {urlParams.orderId && <h2 className="title">Numer Twojego zamówienia: {urlParams.orderId} </h2>}
-
-                    {props.type === "p24" ? (
-                        <>
-                            <div className="is-size-5">Twoja płatność została zaksięgowana.</div>
-                        </>
-                    ) : (
-                        <>
-                            <div className="is-size-5">Wybrałeś płatność przelewem.</div>
-                            <div className="mt-3">Dane do przelewu:</div>
-                            <div>
-                                Numer konta: {BANK_ACCOUNT}
-                                <br />
-                                {ADRES_0_BIURO}
-                                <br />
-                                {ADRES_1_BIURO}
-                                <br />
-                                {ADRES_2_BIURO}
-                                <br />
-                            </div>
-                            <div className="mt-5">Twoje zamówienie zostanie zrealizowane po zaksięgowaniu wpłaty na naszym koncie.</div>
-                        </>
+        <section className="order-confirmation">
+            <div className="order-confirmation-card">
+                <div className="order-confirmation-icon" aria-hidden="true">
+                    <FontAwesomeIcon icon={isP24 ? faCheckCircle : faUniversity} />
+                </div>
+                <div className="order-confirmation-content">
+                    <p className="order-confirmation-eyebrow">Zamówienie przyjęte</p>
+                    <h1>Dziękujemy za złożenie zamówienia</h1>
+                    {urlParams.orderId && (
+                        <p className="order-confirmation-order">
+                            Numer zamówienia: <strong>{urlParams.orderId}</strong>
+                        </p>
                     )}
-                    <div className="mt-3">
-                        {props.system === SYSTEM_CHOICES.SYSTEM_BB ? (
-                            <>
-                                <Link to="/panel" className="is-underlined" style={{ color: "white" }}>
-                                    <button className="button is-warning mt-3">Przejdź do Twojego Biegu Belfrów</button>
-                                </Link>
-                            </>
-                        ) : (
-                            <>
-                                Sprawdź zakładkę{" "}
-                                <Link to="/kursy" className="is-underlined" style={{ color: "white" }}>
-                                    moje kursy
-                                </Link>
-                                .
-                            </>
-                        )}
-                    </div>
+
+                    {isP24 ? (
+                        <p className="order-confirmation-message">
+                            Twoja płatność została zaksięgowana. Jeśli zamówienie obejmuje kursy online, znajdziesz je w zakładce Moje kursy.
+                        </p>
+                    ) : (
+                        <div className="order-confirmation-message">
+                            <p>Wybrałeś płatność przelewem. Zamówienie zostanie zrealizowane po zaksięgowaniu wpłaty na naszym koncie.</p>
+                            <div className="order-confirmation-transfer">
+                                <span>Dane do przelewu</span>
+                                <strong>{BANK_ACCOUNT}</strong>
+                                <small>
+                                    {ADRES_0_BIURO}
+                                    <br />
+                                    {ADRES_1_BIURO}
+                                    <br />
+                                    {ADRES_2_BIURO}
+                                </small>
+                            </div>
+                        </div>
+                    )}
+
+                    {props.system === SYSTEM_CHOICES.SYSTEM_BB ? (
+                        <Link to="/panel" className="button is-primary order-confirmation-action">
+                            Przejdź do Twojego Biegu Belfrów
+                        </Link>
+                    ) : (
+                        <Link to="/kursy" className="button is-primary order-confirmation-action">
+                            <FontAwesomeIcon icon={faBookOpen} />
+                            Moje kursy
+                        </Link>
+                    )}
                 </div>
             </div>
         </section>
