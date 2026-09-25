@@ -1,5 +1,5 @@
 // Stary widok /szkolenia/kontakt: na razie nieużywany w routingu panelu szkoleń.
-// Zachowany do ewentualnego przywrócenia. Nadal używany przez trasę /bb/kontakt.
+// Zachowany do ewentualnego przywrócenia. Trasa /bb/kontakt również jest na razie wyłączona.
 import { useContext, useEffect, useState } from "react";
 import { ADDR_TYPE_CHOICES, ADRES_1_BIURO, ADRES_2_BIURO, EMAIL_BIURO, TELEFON_BIURO } from "../components/Enumerators";
 import { ContactForm } from "../components/forms/ContactForm";

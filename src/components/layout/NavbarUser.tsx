@@ -41,7 +41,9 @@ export const NavbarUser = (props: INavbarUser) => {
         <>
             {basket}
             <a href="/szkolenia/kursy" className="button">Moje kursy</a>
+            {/* Bieg Belfrów na razie wyłączony w routingu.
             <a href="/bb/panel" className="button is-warning">Bieg Belfrów</a>
+            */}
             <Link to="/konto" className="button">Konto</Link>
             <button type="button" className="button" onClick={handleLogoutBtn} title="Wyloguj" aria-label="Wyloguj się">
                 <i className="fa-solid fa-right-from-bracket" aria-hidden="true"></i>

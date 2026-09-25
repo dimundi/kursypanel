@@ -37,14 +37,19 @@ const Confirmation = React.lazy(() => import("../../pages/Confirmation"));
 // const CartClass = React.lazy(() => import("../../classes/CartClass"));
 const SurveyCert = React.lazy(() => import("../../pages/test/SurveyCert"));
 // const RequestClass = React.lazy(() => import("../../classes/RequestClass"));
-const BBMain = React.lazy(() => import("../../pages/bblanding/BBMain"));
-const BBPageLayout = React.lazy(() => import("../../pages/bblanding/BBPageLayout"));
-const BBZapisy = React.lazy(() => import("../../pages/bb/BBZapisy"));
-const BB = React.lazy(() => import("../../pages/bb/BB"));
+// Na razie nieużywane: wyłączony routing Biegu Belfrów / kontaktu.
+// const BBMain = React.lazy(() => import("../../pages/bblanding/BBMain"));
+// Na razie nieużywane: wyłączony routing Biegu Belfrów / kontaktu.
+// const BBPageLayout = React.lazy(() => import("../../pages/bblanding/BBPageLayout"));
+// Na razie nieużywane: wyłączony routing Biegu Belfrów / kontaktu.
+// const BBZapisy = React.lazy(() => import("../../pages/bb/BBZapisy"));
+// Na razie nieużywane: wyłączony routing Biegu Belfrów / kontaktu.
+// const BB = React.lazy(() => import("../../pages/bb/BB"));
 const Course = React.lazy(() => import("../../pages/course/Course"));
 const Login = React.lazy(() => import("../../pages/user/Login"));
 const Inquiry = React.lazy(() => import("../../pages/Inquiry"));
-const Contact = React.lazy(() => import("../../pages/Contact"));
+// Na razie nieużywane: wyłączony routing Biegu Belfrów / kontaktu.
+// const Contact = React.lazy(() => import("../../pages/Contact"));
 const UserAccount = React.lazy(() => import("../../pages/user/UserAccount"));
 
 function getSessionStorageOrDefault(key: string, defaultValue: any) {
@@ -120,6 +125,7 @@ export const Router = () => {
                         <Route path="/bb/kursy" element={<Navigate to="/szkolenia/kursy" />} />
                     </Routes>
                 </BrowserRouter> */}
+                {/* Bieg Belfrów: cały routing /bb/* na razie nieużywany. Zachowany do przywrócenia.
                 <BrowserRouter basename={"/bb"}>
                     <div className="router-content ">
                         <Routes>
@@ -127,7 +133,7 @@ export const Router = () => {
                                 path="/"
                                 element={
                                     <BBPageLayout bodyClassName={"has-background-white"}>
-                                        {/* bodyClassName={"is-primary-gradient"}> */}
+                                        bodyClassName={"is-primary-gradient"} — dawny wariant
                                         <BBMain />
                                     </BBPageLayout>
                                 }
@@ -271,6 +277,7 @@ export const Router = () => {
                         </Routes>
                     </div>
                 </BrowserRouter>
+                */}
 
                 <BrowserRouter basename={"/szkolenia"}>
                     <div className="router-content ">
@@ -469,6 +476,7 @@ export const Router = () => {
                                     </PageLayout>
                                 }
                             />
+                            {/* /szkolenia/bb/: na razie nieużywane.
                             <Route
                                 path="/bb/"
                                 element={
@@ -477,6 +485,7 @@ export const Router = () => {
                                     </PageLayout>
                                 }
                             />
+                            */}
                             <Route
                                 path="/kursy/"
                                 element={
