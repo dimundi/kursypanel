@@ -10,7 +10,7 @@ const PageTitle = (props:{ children:ReactNode }) => {
     }
     
     return (
-        <div className={"is-primary-gradient "+mobileClass}>
+        <div className={"panel-page-title is-primary-gradient "+mobileClass}>
             <div className="container has-text-white p-responsive">
                 {props.children}
             </div>

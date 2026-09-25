@@ -27,7 +27,7 @@
     .panel-header { background: white; border-bottom: 1px solid #edf0f5; }
     .panel-navbar { max-width: 1248px; margin: auto; padding: 12px 24px; background: white; min-height: 82px; }
     .navbar-brand { align-items: center; }
-    .panel-brand { padding: 0; margin-right: 32px; }
+    .panel-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 0; margin-right: 32px; }
     .panel-brand img { width: 200px; max-height: none; height: auto; }
     .navbar-menu { background: white; box-shadow: none; }
     .navbar-item, .navbar-link { font-size: 14px; color: #111; background: transparent; }
@@ -155,7 +155,7 @@
 }
 
 .training-panel .training-footer {
-    padding: 0 24px 55px;
+    padding: 48px 24px 55px;
     .training-footer-surface { max-width: 1200px; margin: auto; padding: 60px 58px 0; border-radius: 24px; background: #111; color: white; overflow: hidden; }
     a { color: white; text-decoration: none; }
     a:hover { color: #0075f6; }
@@ -184,7 +184,7 @@
 }
 @media (max-width: 600px) {
     .training-panel .training-footer {
-        padding: 0 16px 24px;
+        padding: 32px 16px 24px;
         .training-footer-top { grid-template-columns: 1fr; gap: 32px; }
         .training-footer-bottom { margin-top: 36px; flex-direction: column; align-items: flex-start; }
     }
@@ -195,4 +195,104 @@
 }
 @media (max-width: 450px) {
     .training-panel .training-footer .training-footer-contact-columns { grid-template-columns: 1fr; gap: 0; }
+}
+.training-panel {
+    .navbar-start > .navbar-item.active::after { transform: scaleX(1); }
+    .panel-user-menu { position: relative; }
+    .panel-user-trigger { display: flex; align-items: center; gap: 8px; padding: 0; border: 0; background: transparent; color: #0063d1; cursor: pointer; }
+    .panel-user-avatar { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #bed5f2; border-radius: 50%; background: #e8f3fe; font: 600 16px "Plus Jakarta Sans", sans-serif; }
+    .panel-user-trigger > svg { width: 10px; }
+    .panel-user-options { position: absolute; right: 0; top: calc(100% + 12px); z-index: 40; width: 240px; padding: 8px; border: 1px solid #dce3ed; border-radius: 16px; background: white; box-shadow: 0 12px 36px #17335324; }
+    .panel-user-options a, .panel-user-options button { display: block; width: 100%; text-align: left; padding: 12px; color: #111; font: inherit; font-size: 14px; border: 0; border-radius: 8px; background: transparent; cursor: pointer; }
+    .panel-user-options a:hover, .panel-user-options button:hover { background: #e8f3fe; color: #0063d1; }
+    .panel-user-options button { border-top: 1px solid #edf0f5; border-radius: 0 0 8px 8px; margin-top: 4px; }
+}
+@media (max-width: 1023px) {
+    .training-panel .panel-account-nav { justify-content: flex-end; }
+}
+.training-panel .panel-page-title {
+    background: transparent;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 28px 0 16px !important;
+    h1 { margin: 0; font-size: 24px; line-height: 1.4; }
+}
+@media (max-width: 700px) {
+    .training-panel .panel-page-title {
+        padding: 20px 0 12px !important;
+        h1 { font-size: 21px; }
+    }
+}
+.training-panel {
+    .course-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+    .course-card { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 0; border-radius: 20px; background: #eff6ff; box-shadow: none; }
+    .course-card-image { flex-shrink: 0; aspect-ratio: 16 / 10; margin: 12px 12px 0; border-radius: 14px; overflow: hidden; background: #e8f3fe; }
+    .course-card-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .course-card-placeholder { display: grid; place-items: center; height: 100%; background: linear-gradient(135deg, #e8f3fe, #c5dfff); color: #0075f6; font-size: 48px; }
+    .course-card-body { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 16px 20px 20px; overflow-wrap: anywhere; }
+    .course-card-type { min-height: 18px; color: #687182; font-size: 12px; line-height: 18px; }
+    .course-card-title { min-height: 2.6em; margin: 0; font-size: 23px; font-weight: 400; line-height: 1.3; letter-spacing: -0.5px; }
+    .course-card .tag { height: auto; white-space: normal; padding: 4px 8px; margin: 0 !important; }
+    .course-card-order-number { font-size: 13px; margin-bottom: 6px; }
+    .course-card-labels { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 6px; }
+    .course-card-labels .tag:empty { display: none; }
+    .course-card-actions { margin-top: auto; padding-top: 20px; font-size: 14px !important; }
+    .course-card-actions .level { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin: 0; }
+    .course-card-actions .level-left, .course-card-actions .level-right { margin: 0; justify-content: flex-start; flex-wrap: wrap; }
+    .course-card-details-toggle { display: inline-flex; align-items: center; gap: 8px; border: 0; padding: 0; background: transparent; color: #203b8f; font: inherit; cursor: pointer; }
+    .course-card-details-arrow { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #203b8f; color: white; font-size: 20px; line-height: 1; }
+    .course-card-details-arrow svg { display: block; width: 14px; height: 14px; }
+    .course-card-actions .button { padding: 9px 14px; font-size: 14px; }
+    .course-card-actions .level-left { flex: 1; }
+    .course-card-actions .level-right { margin-left: auto; }
+    .course-card-details-toggle:hover { text-decoration: underline; }
+}
+@media (max-width: 1000px) {
+    .training-panel .course-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+    .training-panel .course-card-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .training-panel .course-card-body { padding: 20px; }
+}
+.training-panel .panel-brand-caption {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: #e8f3fe;
+    color: #0c4e98;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.training-panel {
+    .course-overview { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 16px; }
+    .course-lessons, .course-certificate { min-width: 0; padding: 28px; border-radius: 20px; }
+    .course-lessons { background: white; border: 1px solid #e2e9f2; }
+    .course-overview h2 { margin: 0; font-size: 21px; line-height: 1.4; }
+    .course-section-heading { display: flex; align-items: center; gap: 12px; }
+    .course-lesson-count { border-radius: 999px; background: #edf5ff; color: #0c4e98; padding: 3px 10px; font-size: 13px; }
+    .course-section-hint { color: #687182; font-size: 14px; margin: 8px 0 24px; }
+    .course-lesson-list { display: grid; gap: 12px; list-style: none; padding: 0; margin: 0; }
+    .course-lesson-button { width: 100%; display: flex; align-items: center; gap: 16px; text-align: left; padding: 16px; border: 1px solid #dce3ed; border-radius: 14px; background: #f8faff; color: #111; cursor: pointer; font: inherit; }
+    .course-lesson-button:hover { border-color: #0075f6; background: #edf5ff; }
+    .course-lesson-button:disabled { opacity: .55; cursor: default; }
+    .course-lesson-number { display: grid; place-items: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px; background: #e1eeff; color: #0c4e98; font-size: 14px; font-weight: 600; }
+    .course-lesson-name { flex: 1; font-size: 16px; font-weight: 500; overflow-wrap: anywhere; }
+    .course-lesson-open { color: #203b8f; flex-shrink: 0; }
+    .course-certificate { background: #edf5ff; font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
+    .course-certificate-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: white; color: #0075f6; font-size: 24px; margin-bottom: 16px; }
+    .course-certificate h2 { margin-bottom: 14px; }
+    .course-certificate a:not(.button) { text-decoration: underline; text-underline-offset: 3px; }
+}
+@media (max-width: 900px) {
+    .training-panel .course-overview { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+    .training-panel {
+        .course-lessons, .course-certificate { padding: 20px; }
+        .course-lesson-button { padding: 12px; gap: 12px; }
+    }
 }

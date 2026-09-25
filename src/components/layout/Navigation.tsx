@@ -2,14 +2,14 @@ import { CONTACT_URL } from "../elements/ContactRedirect";
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import logo from "../../static/rewers-logo.svg";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { TRAINING_OFFER_URL } from "../elements/TrainingOfferRedirect";
 import { NavbarUser } from "./NavbarUser";
 import AnimationSideButton from "../elements/AnimationSideButton";
 
 const Navigation = () => {
     const [isHamburgerActive, setIsHamburgerActive] = React.useState(false);
-    const { basketCnt, inquiryCnt } = useContext(UserContext);
+    const { basketCnt, inquiryCnt, isLogged } = useContext(UserContext);
     const location = useLocation();
     const categoryId = "";
     useEffect(() => { setIsHamburgerActive(false); }, [location.pathname]);
@@ -22,6 +22,7 @@ const Navigation = () => {
                 <div className="navbar-brand">
                     <a className="navbar-item panel-brand" href="/szkolenia" aria-label="Rewers — platforma szkoleniowa">
                         <img src={logo} alt="Rewers — Ośrodek Doskonalenia Nauczycieli" width="200" height="42" />
+                        <span className="panel-brand-caption">Platforma szkoleniowa</span>
                     </a>
                     <button type="button" onClick={() => setIsHamburgerActive(!isHamburgerActive)}
                         className={`navbar-burger burger ${isHamburgerActive ? "is-active" : ""}`}
@@ -32,8 +33,13 @@ const Navigation = () => {
                 </div>
                 <div id="navbarMainMenu" className={`navbar-menu ${isHamburgerActive ? "is-active" : ""}`}>
                     <div className="navbar-start">
-                        <a href={TRAINING_OFFER_URL} className="navbar-item">Oferta szkoleń</a>
-                        <a href={CONTACT_URL} className="navbar-item">Kontakt</a>
+                        {isLogged ? <>
+                            <NavLink to="/kursy" className="navbar-item">Moje kursy</NavLink>
+                            <NavLink to="/konto/certyfikaty" className="navbar-item">Certyfikaty</NavLink>
+                        </> : <>
+                            <a href={TRAINING_OFFER_URL} className="navbar-item">Oferta szkoleń</a>
+                            <a href={CONTACT_URL} className="navbar-item">Kontakt</a>
+                        </>}
                     </div>
                     <div className="navbar-end panel-account-nav"><NavbarUser basketCnt={basketCnt} /></div>
                 </div>

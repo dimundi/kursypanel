@@ -8,7 +8,7 @@ import UserVAT from "./UserVAT";
 import UserCert from "./UserCerts";
 import UserCouponList from "./UserCouponList";
 import { IUrlCoupon } from "../../interfaces/IUrl";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PageTitle from "../../components/layout/PageTitle";
 import { faBagShopping, faCertificate, faFileInvoice, faTicket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,14 +20,11 @@ const UserAccount = () => {
     type taTypesType = "zamowienia" | "osobowe" | "none" | "rozliczeniowe" | "certyfikaty" | "kupony"; //| 'kursy'
     const urlParams = useParams<IUrlCoupon>();
 
-    const [activeTab, setActiveTab] = useState<taTypesType>(() => {
-        if (urlParams.activeTab) {
-            return urlParams.activeTab as taTypesType;
-        }
-        if (urlParams.kupon) return "kupony";
-        else return "zamowienia";
-    });
-
+    const navigate = useNavigate();
+    const tabs = ["zamowienia", "osobowe", "rozliczeniowe", "certyfikaty", "kupony"];
+    const activeTab: taTypesType = urlParams.kupon ? "kupony"
+        : tabs.includes(urlParams.activeTab || "") ? urlParams.activeTab as taTypesType : "zamowienia";
+    const setActiveTab = (tab: taTypesType) => navigate("/konto/" + tab);
     /* te hooki będę wykorzystywane w zakładkach */
     const [orders, setOrders] = useState<IOrder[]>([] as IOrder[]);
     const [certs, setCerts] = useState<IUserCert[]>([] as IUserCert[]);
@@ -42,22 +39,14 @@ const UserAccount = () => {
 
     return (
         <>
-            <PageTitle>
-                {/* <nav
-                    className="breadcrumb mb-1 is-size-7-mobile is-size-3"
-                    aria-label="breadcrumbs"
-                > */}
-                <ul>
-                    {/* <li><a href="#">Twoje konto</a></li> */}
-                    <li className="is-active is-size-6-mobile is-size-4">
-                        <a href="#" className="has-text-white">
-                            Twoje konto
-                        </a>
-                    </li>
-                </ul>
-                {/* </nav> */}
-                <div className="is-size-7-mobile is-size-6 ">W tym miejscu zarządzasz ustawieniami swojego konta</div>
-            </PageTitle>
+            <PageTitle><h1>{{
+                zamowienia: "Zamówienia",
+                osobowe: "Dane osobowe",
+                rozliczeniowe: "Dane rozliczeniowe",
+                certyfikaty: "Certyfikaty",
+                kupony: "Kupony",
+                none: "Twoje konto",
+            }[activeTab]}</h1></PageTitle>
 
             <section>
                 <div className="container userAccount">

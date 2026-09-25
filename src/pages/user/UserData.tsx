@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { UserContext } from "../../context/UserContext";
+import { useContext, useState } from "react";
 import RequestClass from "../../classes/RequestClass";
 import { genderFormOptions, Input } from "../../components/forms/Input";
 import { useForm } from "react-hook-form";
@@ -9,6 +10,7 @@ import SubmitButton from "../../components/forms/SubmitButton";
 import { isMobile } from "react-device-detect";
 
 const UserData = () => {
+    const { user, setUser } = useContext(UserContext);
     const { userData, setNotification, setIsUserDataRead } = useUserAccountContext();
     const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -25,6 +27,7 @@ const UserData = () => {
         };
 
         const succ_callback = (result: any) => {
+            setUser({ ...user, first_name: data.first_name, last_name: data.last_name });
             if (setNotification) setNotification(RequestClass.succAlert("Sukces!", <div>Dane zostały zmienione.</div>));
 
             if (setIsUserDataRead) {

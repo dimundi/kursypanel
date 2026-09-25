@@ -1,30 +1,20 @@
-/* lekcja jako element spisu treści */
-import HelperClass from "../../classes/HelperClass";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useUserCourseContext } from "../../context/UserCourseContext";
 import { ILesson } from "../../interfaces/IUserCourse";
 
-
-export default function LessonTabItem(props:{lesson?:ILesson, index?:number}) {
-
-    const {setLessonId, lessonId, activeTab, setActiveTab} = useUserCourseContext()  
-    
+export default function LessonTabItem(props: { lesson?: ILesson; index?: number }) {
+    const { setLessonId, setActiveTab } = useUserCourseContext();
     return (
-        <>
-            <div className="my-3 is-size-4">
-            <a onClick={() => {
-                        if (setLessonId) {
-                            if ((props.lesson?.lessonId !== undefined) && (props.lesson?.lessonId !== lessonId)) 
-                                setLessonId(props.lesson?.lessonId);
-                            if (activeTab !== 'lekcja') {
-                                if (setActiveTab)
-                                    setActiveTab('lekcja')
-                            }
-                        }
-                        return false;
-                    }}>
-                {HelperClass.addUndefined(props.index, 1)}. {props.lesson?.name}</a>
-
-            </div>
-        </>
-    )
+        <button type="button" className="course-lesson-button" disabled={props.lesson?.lessonId === undefined}
+            onClick={() => {
+                if (props.lesson?.lessonId === undefined) return;
+                setLessonId?.(props.lesson.lessonId);
+                setActiveTab?.("lekcja");
+            }}>
+            <span className="course-lesson-number" aria-hidden="true">{String((props.index ?? 0) + 1).padStart(2, "0")}</span>
+            <span className="course-lesson-name">{props.lesson?.name}</span>
+            <span className="course-lesson-open" aria-hidden="true"><FontAwesomeIcon icon={faArrowRight} /></span>
+        </button>
+    );
 }

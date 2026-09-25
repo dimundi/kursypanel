@@ -114,16 +114,7 @@ export default function CourseContainer(props: {
         }
     }, [activeTab]);
 
-    let title = "Twoje kursy";
-    let subtitle = "Wybierz kurs, który chcesz uruchomić.";
-    if (activeTab === "spis_tresci") {
-        subtitle = "Wybierz lekcję tego kursu";
-    } else if (activeTab === "lekcja") {
-        subtitle = "";
-    } else if (activeTab === "ankieta") {
-        subtitle = "Wypełnij ankietę";
-    }
-
+    let title = "Moje kursy";
     if (productId > 0 && activeTab !== "lista_kursow") {
         // subtitle="Realizujesz kurs"
         if (userCourse?.product?.pName) title = userCourse?.product?.pName;
@@ -131,27 +122,13 @@ export default function CourseContainer(props: {
     return (
         <>
             {/* productId: {productId}, lekcja: {lessonId} */}
-            <PageTitle>
-                {/* <nav
-                    className="breadcrumb mb-1 is-size-7-mobile is-size-3"
-                    aria-label="breadcrumbs"
-                > */}
-                <ul>
-                    <li className="is-active is-size-6-mobile is-size-4">
-                        <a href="#" className="has-text-white">
-                            {title}
-                        </a>
-                    </li>
-                </ul>
-                {/* </nav> */}
-                <div className="is-size-7-mobile is-size-6 ">{subtitle}</div>
-            </PageTitle>
+            <PageTitle><h1>{title}</h1></PageTitle>
 
-            <BodyContainer noPadding={true} className="mb-2">
+            {activeTab !== "lista_kursow" && <BodyContainer noPadding={true} className="mb-2">
                 <div className="tabs">
                     <ul>
                         {/* <li className={activeTab==="kursy" ? "is-active":""}><a onClick={() => {setActiveTab("kursy")}}>Twoje kursy</a></li> */}
-                        <li className={activeTab === "lista_kursow" ? "is-active" : ""}>
+                        <li>
                             <a
                                 onClick={() => {
                                     if (setActiveTab) setActiveTab("lista_kursow");
@@ -195,7 +172,7 @@ export default function CourseContainer(props: {
                         )}
                     </ul>
                 </div>
-            </BodyContainer>
+            </BodyContainer>}
             <BodyContainer noPadding={props.noPadding} className="mb-5">
                 {step === 1 && <Wait text="pobieranie treści kursu" />}
                 {step === 2 && <>{props.children}</>}

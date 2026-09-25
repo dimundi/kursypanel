@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookOpen, faArrowRight, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import HelperClass from "../../classes/HelperClass";
 import { IUserCourse } from "../../interfaces/IUserCourse";
@@ -11,13 +13,24 @@ import OrderStatus from "../order/OrderStatus";
 const UserCoursesListElement = (props: { course?: IUserCourse; index: number }) => {
     const [showMore, setShowMore] = useState(false);
 
+    const [failedImage, setFailedImage] = useState<string>();
+    const image = props.course?.prodDef?.img;
+    const title = props.course?.product?.pName || props.course?.prodDef?.name || "Szkolenie";
     return (
         <>
-            <div className="mt-2 box">
-                <div className="is-size-6">
+            <article className="course-card">
+                <div className="course-card-image">
+                    {image && image !== failedImage ? (
+                        <img src={image} alt="" loading="lazy" onError={() => setFailedImage(image)} />
+                    ) : (
+                        <div className="course-card-placeholder" aria-hidden="true"><FontAwesomeIcon icon={faBookOpen} /></div>
+                    )}
+                </div>
+                <div className="course-card-body">
+                <div className="course-card-type">
                     <ProdType prodType={props.course?.product?.prodType} courseType={props.course?.product?.courseType} />
                 </div>
-                <div className="is-size-4">{props.course?.product?.pName}</div>
+                <h2 className="course-card-title">{title}</h2>
                 {props.course?.product?.courseType === COURSE_TYPES_CHOICES.COURSE_TYPE_WEBINAR &&
                     (!HelperClass.dateIsPast(props.course?.product.start, props.course?.product.stop) ? (
                         <>
@@ -34,28 +47,29 @@ const UserCoursesListElement = (props: { course?: IUserCourse; index: number }) 
 
                 {props.course?.status !== ORDER_STATUS_CHOICES.ORDER_PAID && (
                     <div>
-                        <span className="is-size-6 pr-3">
+                        <div className="course-card-order-number">
                             numer zamówienia: <b>{props.course?.orderId}</b>
-                        </span>
-                        <OrderStatus status={props.course?.status} paymentSys={props.course?.paymentSys} />
+                        </div>
+                        <div className="course-card-labels"><OrderStatus status={props.course?.status} paymentSys={props.course?.paymentSys} /></div>
                     </div>
                 )}
 
-                <div className="is-size-6">
+                <div className="is-size-6 course-card-actions">
                     <nav className="level">
                         <div className="level-left">
                             <UserCourseStartButton course={props.course} />
                         </div>
                         <div className="level-right">
-                            <a
+                            <button type="button" className="course-card-details-toggle" aria-expanded={showMore}
                                 onClick={() => {
                                     setShowMore(!showMore);
                                     return false;
                                 }}
                             >
                                 {" "}
-                                {showMore ? "pokaż mniej" : "pokaż więcej"}
-                            </a>
+                                {showMore ? "Zwiń" : "Szczegóły"}
+                                <span className="course-card-details-arrow" aria-hidden="true"><FontAwesomeIcon icon={showMore ? faArrowUp : faArrowRight} /></span>
+                            </button>
                         </div>
                     </nav>
                 </div>
@@ -85,7 +99,8 @@ const UserCoursesListElement = (props: { course?: IUserCourse; index: number }) 
                         <div className="is-size-7">id produktu: {props.course?.product?.productId}</div>
                     </div>
                 )}
-            </div>
+                </div>
+            </article>
         </>
     );
 };
