@@ -12,7 +12,7 @@ import { Link, useParams } from "react-router-dom";
 import { IUrlCoupon } from "../../interfaces/IUrl";
 import { isMobile } from "react-device-detect";
 import { UserContext } from "../../context/UserContext";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export interface ICuponProducts {
@@ -30,22 +30,6 @@ const UserCouponList = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
-    let infoMsg = (
-        <div className="m-2">
-            Swoimi kursami możesz zarządzać tutaj
-            <FontAwesomeIcon className="mx-2" icon={faArrowRight} />
-            <Link to="/kursy" className="has-text-weight-bold">
-                Moje kursy
-            </Link>
-            .<br></br>
-            Zawsze możesz wyświetlić swoje kursy rozwijając menu w prawym górnym rogu ekranu i klikając{" "}
-            <Link to="/kursy" className="has-text-weight-bold">
-                Moje kursy
-            </Link>
-            .
-        </div>
-    );
 
     function saveDefault(data: any) {
         const couponAlreadyUsedHint = (
@@ -80,16 +64,10 @@ const UserCouponList = () => {
                         <>
                             {RequestClass.errorAlert(result, true)}
                             {couponAlreadyUsedHint}
-                            {infoMsg}
                         </>
                     );
                 } else {
-                    setNotification(
-                        <>
-                            {RequestClass.errorAlert(result, true)}
-                            {infoMsg}
-                        </>
-                    );
+                    setNotification(RequestClass.errorAlert(result, true));
                 }
             }
             setIsSubmitted(false);
@@ -105,24 +83,26 @@ const UserCouponList = () => {
                         </Notification>
                     );
                 } else {
-                    // if (setIsCoursesRead)
-                    //     setIsCoursesRead(false);
                     setNotification(
-                        <>
-                            <Notification type="success" lead="Gratulacje!">
-                                Aktywowałeś następujące kursy:
-                                {result.products?.map((product: IInStore, index) => (
-                                    <div key={"szk_" + index} className="mt-2">
-                                        {index + 1}. {product.pName}
-                                    </div>
-                                ))}
-                                <div className="mt-2">
-                                    Przejdź do zakładki <Link to="/kursy">Moje kursy</Link>, aby zarządzać swoimi kursami.
-                                </div>
-                            </Notification>
-
-                            {infoMsg}
-                        </>
+                        <div className="coupon-success-card">
+                            <div className="coupon-success-icon" aria-hidden="true">
+                                <FontAwesomeIcon icon={faCheckCircle} />
+                            </div>
+                            <div className="coupon-success-content">
+                                <p className="coupon-success-eyebrow">Kupon aktywowany</p>
+                                <h3>Dodaliśmy kursy do Twojej biblioteki</h3>
+                                <p>Aktywowane szkolenia:</p>
+                                <ol className="coupon-success-list">
+                                    {result.products?.map((product: IInStore, index) => (
+                                        <li key={product.productId || "szk_" + index}>{product.pName}</li>
+                                    ))}
+                                </ol>
+                                <Link to="/kursy" className="button is-primary coupon-success-action">
+                                    <FontAwesomeIcon icon={faBookOpen} />
+                                    Moje kursy
+                                </Link>
+                            </div>
+                        </div>
                     );
                 }
             }
@@ -154,31 +134,33 @@ const UserCouponList = () => {
             {/* <UserDataContainer apiCertRequired={true} waitMsg="Pobieram listę certyfikatów" >           */}
             <UserDataContainer>
                 <>
-                    {" "}
                     {isMobile && <div className="mb-3 has-text-weight-bold">Kupony</div>}
-                    <div className="slim">
-                        <Input
-                            id="KUPON_1"
-                            name="KUPON_1"
-                            label="wprowadź kod kuponu"
-                            placeholder="kupon"
-                            register={register}
-                            //onChange={handleChange}
-                            defaultValue={urlParams.kupon}
-                            errors={errors}
-                            // required={forceRequired}
-                        ></Input>
-                        <SubmitButton
-                            className="mt-4"
-                            handleSubmit={handleSubmit}
-                            routine={saveDefault}
-                            isSubmitted={isSubmitted}
-                        >
-                            Aktywuj kupon
-                        </SubmitButton>
+                    <div className="coupon-activation-card">
+                        <div className="coupon-activation-header">
+                            <p className="coupon-activation-eyebrow">Kod dostępu</p>
+                            <h3>Aktywuj kupon</h3>
+                            <p>Wpisz kod z wiadomości, aby dodać przypisane szkolenia do swojego konta.</p>
+                        </div>
+                        <div className="coupon-activation-form">
+                            <Input
+                                id="KUPON_1"
+                                name="KUPON_1"
+                                label="Kod kuponu"
+                                placeholder="np. ABC123"
+                                register={register}
+                                defaultValue={urlParams.kupon}
+                                errors={errors}
+                            ></Input>
+                            <SubmitButton
+                                className="coupon-activation-submit"
+                                handleSubmit={handleSubmit}
+                                routine={saveDefault}
+                                isSubmitted={isSubmitted}
+                            >
+                                Aktywuj kupon
+                            </SubmitButton>
+                        </div>
                     </div>
-                    {/* Twoje kupony:
-                <div>Nie masz jeszcze kuponów.</div> */}
                 </>
             </UserDataContainer>
         </>

@@ -8,6 +8,7 @@ export interface ILessonBlock {
     blockId?: number;
     type?: COURSE_BLOCK_CHOICES;
     html?: string;
+    txt?: string;
     test?: ITest;
 }
 

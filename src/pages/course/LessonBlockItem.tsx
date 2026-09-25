@@ -8,8 +8,8 @@ export default function LessonBlockItem(props: { block?: ILessonBlock }) {
 
     /* wymuszam numerowanie pytań */
 
-    if (props.block?.type === COURSE_BLOCK_CHOICES.COURSE_BLOCK_HTML) {
-        return <>{<HTMLCode>{props.block?.html}</HTMLCode>}</>;
+    if (Number(props.block?.type) === COURSE_BLOCK_CHOICES.COURSE_BLOCK_HTML) {
+        return <HTMLCode className="course-lesson-html">{props.block?.html || props.block?.txt}</HTMLCode>;
     }
     // if (props.block?.type === COURSE_BLOCK_CHOICES.COURSE_BLOCK_TEST) {
     //     let surveyCert: ISurveyCert = {};
