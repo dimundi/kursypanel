@@ -1,3 +1,5 @@
+import ContactRedirect from "../elements/ContactRedirect";
+import TrainingOfferRedirect from "../elements/TrainingOfferRedirect";
 import React, { Suspense, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -13,7 +15,6 @@ import Thankyou from "../../pages/Thankyou";
 import Register from "../../pages/user/Register";
 import Error from "../../pages/Error";
 import Activation from "../../pages/user/Activation";
-// import ProductList from "../../pages/products/ProductList";
 //import UserAccount from "../../pages/user/UserAccount";
 import PasswdReminder from "../../pages/user/PasswdReminder";
 import ScrollToTop from "../elements/ScrollToTop";
@@ -31,7 +32,6 @@ import { RedirectInto } from "../elements/RedirectInto";
 /* ten komponent będzie wydzielony w osobnym pliku .js */
 const Cart = React.lazy(() => import("../../pages/cart/Cart"));
 const Home = React.lazy(() => import("../../pages/Home"));
-const ProductList = React.lazy(() => import("../../pages/products/ProductList"));
 const PageLayout = React.lazy(() => import("./PageLayout"));
 const Confirmation = React.lazy(() => import("../../pages/Confirmation"));
 // const CartClass = React.lazy(() => import("../../classes/CartClass"));
@@ -46,7 +46,6 @@ const Login = React.lazy(() => import("../../pages/user/Login"));
 const Inquiry = React.lazy(() => import("../../pages/Inquiry"));
 const Contact = React.lazy(() => import("../../pages/Contact"));
 const UserAccount = React.lazy(() => import("../../pages/user/UserAccount"));
-// const Main = React.lazy(() => import("../../pages/Main"));
 
 function getSessionStorageOrDefault(key: string, defaultValue: any) {
     const stored = sessionStorage.getItem(key);
@@ -278,14 +277,8 @@ export const Router = () => {
                         <Routes>
                             <Route path="/redirect/:token" element={<RedirectInto />} />
                             <Route path="/" element={<Navigate to="/kursy" replace />} />
-                            <Route
-                                path="/list/:categoryId"
-                                element={
-                                    <PageLayout>
-                                        <ProductList />
-                                    </PageLayout>
-                                }
-                            />
+                            <Route path="/list/2" element={<TrainingOfferRedirect />} />
+                            <Route path="/list/3" element={<TrainingOfferRedirect />} />
                             <Route
                                 path="/pliki"
                                 element={
@@ -294,7 +287,8 @@ export const Router = () => {
                                     </PageLayout>
                                 }
                             />
-                            <Route
+                             {/* Stary widok /szkolenia/kontakt na razie nieużywany w routingu; zachowany do ewentualnego przywrócenia.
+<Route
                                 path="/kontakt"
                                 element={
                                     <PageLayout>
@@ -302,6 +296,8 @@ export const Router = () => {
                                     </PageLayout>
                                 }
                             />
+                            */}
+                            <Route path="/kontakt" element={<ContactRedirect />} />
                             {/* Usunąć poniższy link po lutym 2024 */}
                             <Route
                                 path="/platforma/zapytanie/:categoryId?/:basketId?"

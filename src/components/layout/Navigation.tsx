@@ -1,8 +1,9 @@
+import { CONTACT_URL } from "../elements/ContactRedirect";
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import logo from "../../static/rewers-logo.svg";
-import { Link, useLocation } from "react-router-dom";
-import { NavbarOferta } from "./NavbarOferta";
+import { useLocation } from "react-router-dom";
+import { TRAINING_OFFER_URL } from "../elements/TrainingOfferRedirect";
 import { NavbarUser } from "./NavbarUser";
 import AnimationSideButton from "../elements/AnimationSideButton";
 
@@ -10,7 +11,7 @@ const Navigation = () => {
     const [isHamburgerActive, setIsHamburgerActive] = React.useState(false);
     const { basketCnt, inquiryCnt } = useContext(UserContext);
     const location = useLocation();
-    const categoryId = location.pathname.includes("/list/") ? location.pathname.slice(-1) : "";
+    const categoryId = "";
     useEffect(() => { setIsHamburgerActive(false); }, [location.pathname]);
     return (
         <>
@@ -19,7 +20,7 @@ const Navigation = () => {
             )}
             <nav className="navbar panel-navbar" aria-label="Nawigacja panelu szkoleń">
                 <div className="navbar-brand">
-                    <a className="navbar-item panel-brand" href="https://odnrewers.pl/" aria-label="Rewers — strona główna">
+                    <a className="navbar-item panel-brand" href="/szkolenia" aria-label="Rewers — platforma szkoleniowa">
                         <img src={logo} alt="Rewers — Ośrodek Doskonalenia Nauczycieli" width="200" height="42" />
                     </a>
                     <button type="button" onClick={() => setIsHamburgerActive(!isHamburgerActive)}
@@ -31,11 +32,8 @@ const Navigation = () => {
                 </div>
                 <div id="navbarMainMenu" className={`navbar-menu ${isHamburgerActive ? "is-active" : ""}`}>
                     <div className="navbar-start">
-                        <div className="navbar-item has-dropdown is-hoverable">
-                            <button type="button" className="navbar-link panel-offer-toggle">Oferta szkoleń</button>
-                            <div className="navbar-dropdown"><NavbarOferta /></div>
-                        </div>
-                        <Link to="/kontakt" className="navbar-item">Kontakt</Link>
+                        <a href={TRAINING_OFFER_URL} className="navbar-item">Oferta szkoleń</a>
+                        <a href={CONTACT_URL} className="navbar-item">Kontakt</a>
                     </div>
                     <div className="navbar-end panel-account-nav"><NavbarUser basketCnt={basketCnt} /></div>
                 </div>

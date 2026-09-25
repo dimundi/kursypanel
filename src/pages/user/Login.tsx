@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import "./PasswordToggle.scss";
 import { useForm } from "react-hook-form";
 import { Input } from "../../components/forms/Input";
 import UsrMsgTempl, { IUsrMsgTempl } from "./UserMsgTempl";
@@ -27,6 +30,7 @@ export default function Login(props: ILogin) {
     const { setIsLogged, setUserName, setUser } = useContext(UserContext);
     const navigation = useNavigate();
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     // const captchaRef = useRef<ReCAPTCHA>(null)
 
     /* ----------------------------------------------------------------------*/
@@ -100,15 +104,28 @@ export default function Login(props: ILogin) {
                         className="mt-2"
                     ></Input>
 
-                    <Input
-                        type="password"
-                        id={"haslo"}
-                        name="haslo"
-                        placeholder="Hasło" label="Hasło"
-                        register={register}
-                        errors={errors}
-                        className="mt-2"
-                    ></Input>
+                    <label htmlFor="haslo">Hasło</label>
+                    <div className="login-password-control">
+                        <Input
+                            type={showPassword ? "text" : "password"}
+                            id="haslo"
+                            name="haslo"
+                            placeholder="Hasło"
+                            register={register}
+                            errors={errors}
+                            className="mt-2"
+                        />
+                        <button
+                            type="button"
+                            className="login-password-toggle"
+                            aria-label={showPassword ? "Ukryj hasło" : "Pokaż hasło"}
+                            aria-pressed={showPassword}
+                            aria-controls="haslo"
+                            onClick={() => setShowPassword((visible) => !visible)}
+                        >
+                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                        </button>
+                    </div>
 
                     <SubmitButton handleSubmit={handleSubmit} recaptcha={false} routine={submitLogin} isSubmitted={isSubmitted}>
                         Zaloguj

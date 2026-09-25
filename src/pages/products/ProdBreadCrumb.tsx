@@ -1,3 +1,4 @@
+import { TRAINING_OFFER_URL } from "../../components/elements/TrainingOfferRedirect";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CATEGORY_CHOICES } from "../../components/Enumerators";
@@ -34,7 +35,7 @@ const ProdBreadCrumb = (props: { categoryId?: CATEGORY_CHOICES; level1Title?: st
                 case 3:
                     return undefined;
                 case 2:
-                    if (props.categoryId !== undefined) return () => navigation("/list/" + props.categoryId);
+                    if (props.categoryId !== undefined) return () => window.location.assign(TRAINING_OFFER_URL);
                     else return () => navigation("/");
                 case 1:
                 default:

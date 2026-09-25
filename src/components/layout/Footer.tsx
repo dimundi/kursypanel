@@ -1,3 +1,4 @@
+import TrainingFooter from "./TrainingFooter";
 import CookieConsent from "react-cookie-consent";
 import { Link } from "react-router-dom";
 import CustomLinks from "../elements/CustomLinks";
@@ -6,7 +7,7 @@ import { Debug } from "../elements/Debug";
 import { isMobile } from "react-device-detect";
 import fblogo from "../../static/facebook.png";
 
-const Footer = () => {
+const Footer = ({ training = false }: { training?: boolean }) => {
     return (
         <>
             <CookieConsent containerClasses="panel-cookie" buttonClasses="panel-cookie-button" buttonText="Rozumiem i kontynuuję przeglądanie strony.">
@@ -15,7 +16,7 @@ const Footer = () => {
             </CookieConsent>
 
             {/* <div className="my-3"></div> */}
-            <div className="panel-footer has-text-centered is-flex-align-items-flex-end mt-auto">
+            {training ? <TrainingFooter /> : <div className="panel-footer has-text-centered is-flex-align-items-flex-end mt-auto">
                 <div className="content has-text-centered has-background-white-ter py-6">
                     <Debug>
                         <div>Renderuję na: {isMobile ? "TELEFONIE" : "KOMPUTERZE"}</div>
@@ -50,7 +51,7 @@ const Footer = () => {
                         </div>
                     </nav>
                 </div>
-            </div>
+            </div>}
         </>
     );
 };

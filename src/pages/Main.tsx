@@ -1,3 +1,4 @@
+import { TRAINING_OFFER_URL } from "../components/elements/TrainingOfferRedirect";
 import { Link } from "react-router-dom";
 import { CATEGORY_CHOICES } from "../components/Enumerators";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -43,7 +44,7 @@ const Main = () => {
 
                         <div className="is-flex is-flex-wrap-wrap is-justify-content-space-around">
                             <div className="">
-                                <Link to={"/list/" + CATEGORY_CHOICES.CATEGORY_OPEN} className="box main-action-box">
+                                <Link to={TRAINING_OFFER_URL} className="box main-action-box">
                                     <div>
                                         <NoOrphans className="is-size-3 is-size-5-mobile mb-3 has-text-weight-semibold has-text-white">
                                             Oferta dla indywidualnych odbiorców
@@ -53,7 +54,7 @@ const Main = () => {
                                 </Link>
                             </div>
                             <div className="">
-                                <Link to={"/list/" + CATEGORY_CHOICES.CATEGORY_CLOSE} className="box main-action-box">
+                                <Link to={TRAINING_OFFER_URL} className="box main-action-box">
                                     <div>
                                         <NoOrphans className="is-size-3 is-size-5-mobile mb-3 has-text-weight-semibold has-text-white">
                                             Oferta dla rad pedagogicznych

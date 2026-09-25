@@ -25,7 +25,7 @@ export const Notification = (props: INotificationOption) => {
     };
 
     return (
-        <p className={"my-2 mx-2 notification is-light is-" + type}>
+        <div className={"my-2 mx-2 notification is-light is-" + type}>
             {type === "danger" && (
                 <>
                     <FontAwesomeIcon className="has-text-danger-dark is-size-4" icon={faFaceSadTear} /> <br />
@@ -43,6 +43,6 @@ export const Notification = (props: INotificationOption) => {
                 {props.children}
                 {props.code && <span className="error-code">Kod błędu: {props.code}</span>}
             </div>
-        </p>
+        </div>
     );
 };

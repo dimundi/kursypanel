@@ -1,3 +1,4 @@
+import { TRAINING_OFFER_URL } from "../components/elements/TrainingOfferRedirect";
 import { useContext, useEffect, useState } from "react";
 import CartClass from "../classes/CartClass";
 import { ADDR_TYPE_CHOICES, BASKET_TYPE_CHOICES, BASKET_UNKNOWN, CATEGORY_CHOICES, SYSTEM_CHOICES } from "../components/Enumerators";
@@ -156,12 +157,11 @@ const Inquiry = () => {
                                 </CartContext.Provider>
                             </div>
                             <div className="mt-5 mb-5 has-text-left">
-                                <Link
-                                    to={urlParams.categoryId !== undefined ? "/list/" + urlParams.categoryId : "/"}
+                                <a href={TRAINING_OFFER_URL}
                                     className="mr-2 button is-primary is-outlined"
                                 >
                                     {isMobile ? <>chcę dodać kolejne szkolenie</> : <>chcę dodać kolejne szkolenie z oferty sklepu</>}
-                                </Link>
+                                </a>
 
                                 <NoOrphans className="mt-5 is-size-6 is-size-7-mobile">
                                     Jeżeli nie znalazłeś w ofercie szkolenia, które Cię interesuje, napisz do nas. Z przyjemnością zoorganizujemy

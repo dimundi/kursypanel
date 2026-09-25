@@ -53,7 +53,7 @@ const PageLayout = (props: { children: JSX.Element; isProtected?: boolean; bodyC
                 {props.isProtected === true ? <ProtectRoute>{props.children}</ProtectRoute> : <>{props.children}</>}
             </main>
 
-            <Footer />
+            <Footer training />
         </div>
     );
 };
