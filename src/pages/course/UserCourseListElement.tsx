@@ -72,38 +72,48 @@ const UserCoursesListElement = (props: { course?: IUserCourse; index: number }) 
                 </div>
 
                 {showMore && (
-                    <div className="is-size-7">
-                        <hr />
+                    <div className="course-card-details is-size-7">
                         {props.course?.orderId != null && (
-                            <div className="course-card-order-number">
-                                Numer zamówienia: <b>{props.course.orderId}</b>
+                            <div className="course-card-detail-row course-card-order-number">
+                                <span>Numer zamówienia</span>
+                                <b>{props.course.orderId}</b>
                             </div>
                         )}
                         {props.course?.status != null && (
-                            <div className="course-card-labels mb-3">
+                            <div className="course-card-detail-row course-card-labels">
+                                <span>Status</span>
                                 <OrderStatus status={props.course.status} paymentSys={props.course.paymentSys} />
                             </div>
                         )}
                         {props.course?.progress?.started && (
-                            <div>
-                                kurs rozpocząłeś:{" "}
+                            <div className="course-card-detail-row">
+                                <span>Kurs rozpocząłeś</span>
                                 {HelperClass.formatDate(props.course?.progress?.started, DATE_FORMAT_CHOICES.DATE_FORMAT_DATE_TIME)}
                             </div>
                         )}
                         {props.course?.progress?.updated && (
-                            <div>
-                                ostatnia aktywność:{" "}
+                            <div className="course-card-detail-row">
+                                <span>Ostatnia aktywność</span>
                                 {HelperClass.formatDate(props.course?.progress?.updated, DATE_FORMAT_CHOICES.DATE_FORMAT_DATE_TIME)}
                             </div>
                         )}
 
                         {props.course?.validTo &&
                             (HelperClass.courseIsValid(props.course) ? (
-                                <div>kurs dostępny do: {HelperClass.formatDate(props.course?.validTo)}</div>
+                                <div className="course-card-detail-row">
+                                    <span>Kurs dostępny do</span>
+                                    {HelperClass.formatDate(props.course?.validTo)}
+                                </div>
                             ) : (
-                                <div className="has-text-danger-dark">kurs dostępny do dnia: {HelperClass.formatDate(props.course?.validTo)}</div>
+                                <div className="course-card-detail-row has-text-danger-dark">
+                                    <span>Kurs dostępny do dnia</span>
+                                    {HelperClass.formatDate(props.course?.validTo)}
+                                </div>
                             ))}
-                        <div className="is-size-7">id produktu: {props.course?.product?.productId}</div>
+                        <div className="course-card-detail-row is-muted">
+                            <span>ID produktu</span>
+                            {props.course?.product?.productId}
+                        </div>
                     </div>
                 )}
                 </div>

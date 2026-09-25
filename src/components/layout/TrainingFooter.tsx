@@ -13,9 +13,6 @@ export default function TrainingFooter() {
                             <a className="training-footer-return" href="https://odnrewers.pl/">
                                 ← Przejdź do strony Rewers
                             </a>
-                            <Link to="/pliki">
-                                <span aria-hidden="true">→</span>Pliki do pobrania
-                            </Link>
                         </nav>
                     </section>
                     <section className="training-footer-contact" aria-label="Dane kontaktowe">
@@ -45,6 +42,9 @@ export default function TrainingFooter() {
                 </div>
                 <div className="training-footer-bottom">
                     <span>© {new Date().getFullYear()} REWERS. Wszelkie prawa zastrzeżone.</span>
+                    <a href="https://odnrewers.pl/polityka-prywatnosci/" target="_blank" rel="noopener noreferrer">
+                        Polityka prywatności
+                    </a>
                 </div>
                 <Link className="training-footer-logo" to="/" aria-label="Rewers — platforma szkoleniowa">
                     <img src={logo} alt="REWERS" />

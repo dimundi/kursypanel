@@ -6,7 +6,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { BASKET_TYPE_CHOICES, BASKET_UNKNOWN, SYSTEM_CHOICES } from "../Enumerators";
 
 // import Home from "../../pages/Home";
-import Rules from "../../pages/Rules";
+// import Rules from "../../pages/Rules";
 //import Contact from "../../pages/Contact";
 //import Inquiry from "../../pages/Inquiry";
 //import Cart from "../../pages/cart/Cart";
@@ -279,13 +279,14 @@ export const Router = () => {
                 </BrowserRouter>
                 */}
 
-                <BrowserRouter basename={"/szkolenia"}>
+                <BrowserRouter basename={process.env.REACT_APP_ROUTER_BASENAME || (process.env.NODE_ENV === "production" ? "/" : "/szkolenia")}>
                     <div className="router-content ">
                         <Routes>
                             <Route path="/redirect/:token" element={<RedirectInto />} />
                             <Route path="/" element={<Navigate to="/kursy" replace />} />
                             <Route path="/list/2" element={<TrainingOfferRedirect />} />
                             <Route path="/list/3" element={<TrainingOfferRedirect />} />
+                            {/* Nie uzywamy juz widoku /pliki; zostawione do ewentualnego przywrocenia.
                             <Route
                                 path="/pliki"
                                 element={
@@ -294,6 +295,7 @@ export const Router = () => {
                                     </PageLayout>
                                 }
                             />
+                            */}
                              {/* Stary widok /szkolenia/kontakt na razie nieużywany w routingu; zachowany do ewentualnego przywrócenia.
 <Route
                                 path="/kontakt"

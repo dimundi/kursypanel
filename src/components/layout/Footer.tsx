@@ -1,6 +1,5 @@
 import TrainingFooter from "./TrainingFooter";
 import CookieConsent from "react-cookie-consent";
-import { Link } from "react-router-dom";
 import CustomLinks from "../elements/CustomLinks";
 import { ADRES_1_BIURO, ADRES_2_BIURO, CUSTOM_LINK_TYPE, EMAIL_BIURO, TELEFON_BIURO } from "../Enumerators";
 import { Debug } from "../elements/Debug";
@@ -40,7 +39,9 @@ const Footer = ({ training = false }: { training?: boolean }) => {
                         </div>
                         <div className="level-item ">
                             <div>
-                                <Link to="/pliki">Pliki do pobrania</Link>
+                                <a href="https://odnrewers.pl/polityka-prywatnosci/" target="_blank" rel="noopener noreferrer">
+                                    Polityka prywatności
+                                </a>
                                 <br />
                                 <CustomLinks
                                     linkType={CUSTOM_LINK_TYPE.REWERS_SHOP_RULES}

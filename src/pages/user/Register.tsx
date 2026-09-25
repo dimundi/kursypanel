@@ -6,7 +6,7 @@ import { Input } from "../../components/forms/Input";
 import RequestClass from "../../classes/RequestClass";
 import UsrMsgTempl, { IUsrMsgTempl } from "./UserMsgTempl";
 import IReqOptions from "../../interfaces/IReqOptions";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SubmitButton from "../../components/forms/SubmitButton";
 import { IUrlLogin } from "../../interfaces/IUrl";
 import { SYSTEM_CHOICES } from "../../components/Enumerators";
@@ -92,7 +92,11 @@ export default function Register(props: IRegister) {
                     labelClassName="is-size-7 ml-2"
                     label={
                         <>
-                            Zapoznałem się i akceptuję <Link to="/pliki">regulamin i politykę prywatności</Link> serwisu.
+                            Zapoznałem się i akceptuję{" "}
+                            <a href="https://odnrewers.pl/polityka-prywatnosci/" target="_blank" rel="noopener noreferrer">
+                                regulamin i politykę prywatności
+                            </a>{" "}
+                            serwisu.
                         </>
                     }
                 ></Input>
@@ -117,7 +121,10 @@ export default function Register(props: IRegister) {
             system={props.system}
             noImage={props.noImage}
             className={props.className}
-            subtitle={props.subtitle}
+            subtitle={
+                props.subtitle ||
+                "Na podany adres e-mail wyślemy link, który pozwoli kontynuować proces rejestracji."
+            }
         >
             {formJSC}
         </UsrMsgTempl>

@@ -22,9 +22,19 @@ export default function UsrMsgTempl(props: IUsrMsgTemplFull) {
             <section className="panel-auth" aria-label={props.title || "Konto uczestnika"}>
                 <div className="panel-auth-intro">
                     <span className="panel-eyebrow">PLATFORMA SZKOLENIOWA</span>
-                    <h1>Twoja przestrzeń<br />do nauki.</h1>
-                    <p>Szkolenia, materiały i zaświadczenia.<br />Wszystko w jednym miejscu.</p>
-                    <a href="https://odnrewers.pl/" className="panel-back-link">← Wróć do strony Rewers</a>
+                    <h1>
+                        Twoja przestrzeń
+                        <br />
+                        do nauki.
+                    </h1>
+                    <p>
+                        Szkolenia, materiały i zaświadczenia.
+                        <br />
+                        Wszystko w jednym miejscu.
+                    </p>
+                    <a href="https://odnrewers.pl/" className="panel-back-link">
+                        ← Przejdź do strony Rewers
+                    </a>
                 </div>
                 <div className={"panel-auth-card " + (props.className || "")}>
                     <h2 className="panel-auth-title">{props.title}</h2>

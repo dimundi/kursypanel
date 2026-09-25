@@ -20,10 +20,10 @@ const Navigation = () => {
             )}
             <nav className="navbar panel-navbar" aria-label="Nawigacja panelu szkoleń">
                 <div className="navbar-brand">
-                    <a className="navbar-item panel-brand" href="/szkolenia" aria-label="Rewers — platforma szkoleniowa">
+                    <NavLink className="navbar-item panel-brand" to="/" aria-label="Rewers — platforma szkoleniowa">
                         <img src={logo} alt="Rewers — Ośrodek Doskonalenia Nauczycieli" width="200" height="42" />
                         <span className="panel-brand-caption">Platforma szkoleniowa</span>
-                    </a>
+                    </NavLink>
                     <button type="button" onClick={() => setIsHamburgerActive(!isHamburgerActive)}
                         className={`navbar-burger burger ${isHamburgerActive ? "is-active" : ""}`}
                         aria-label={isHamburgerActive ? "Zamknij menu" : "Otwórz menu"}
