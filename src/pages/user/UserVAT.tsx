@@ -49,9 +49,15 @@ const UserData = () => {
         <>
             <UserDataContainer apiUserRequired={true} waitMsg="Pobieram dane użytkownika">
                 {isMobile && <div className="mb-3 has-text-weight-bold">Twoje dane roliczeniowe</div>}
-                <form>
+                <form className="account-form-card">
+                    <div className="account-form-intro">
+                        <h2>Dane rozliczeniowe</h2>
+                        <p>Zapisz domyślne dane do zamówień i faktur.</p>
+                    </div>
                     <InvoiceFormInputs order={order} setOrder={setOrder} register={register} errors={errors} forceRequired={false} />
-                    <SubmitButton handleSubmit={handleSubmit} routine={saveDefault} isSubmitted={isSubmitted} />
+                    <div className="account-form-actions">
+                        <SubmitButton handleSubmit={handleSubmit} routine={saveDefault} isSubmitted={isSubmitted} />
+                    </div>
                     {/* <button className={`button is-primary `+ (isSubmitted?"is-loading":"")}  type="submit" value="Zapisz" onClick={handleSubmit(saveDefault)}>Zapisz</button> */}
                 </form>
             </UserDataContainer>

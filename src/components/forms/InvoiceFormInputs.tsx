@@ -47,8 +47,8 @@ export const InvoiceFormInputs = (props: IInvoiceFormInputs) => {
     //console.log(props.order?.invoice)
     return (
         <>
-            <div className={props.classNames + " slim"}>
-                <div className="is-size-5-mobile is-size-5 has-text-weight-bold is-inline-block">
+            <div className={(props.classNames || "") + " slim account-invoice-form"}>
+                <div className="account-form-choice">
                     <Input
                         type="radio"
                         register={props.register}
@@ -61,7 +61,7 @@ export const InvoiceFormInputs = (props: IInvoiceFormInputs) => {
                         className="m-2"
                     ></Input>
                 </div>
-                <div className="is-size-5-mobile is-size-5 has-text-weight-bold is-inline-block">
+                <div className="account-form-choice">
                     <Input
                         type="radio"
                         register={props.register}
@@ -77,8 +77,8 @@ export const InvoiceFormInputs = (props: IInvoiceFormInputs) => {
                 </div>
 
                 {props.order?.addrContact && (
-                    <>
-                        <div className="mt-4 has-text-weight-semibold is-size-6">Dane kontaktowe odnośnie zamówienia</div>
+                    <section className="account-form-section">
+                        <h3>Dane kontaktowe</h3>
 
                         <AddrFormInputs
                             addrType={"contact"}
@@ -88,12 +88,13 @@ export const InvoiceFormInputs = (props: IInvoiceFormInputs) => {
                             setData={setAddrContact}
                             prefixName="contact_"
                         />
-                    </>
+                    </section>
                 )}
 
                 {!props.order?.invoice && (
-                    <>
-                        <div className="mt-5 has-text-weight-semibold is-size-6">Kupuję prywatnie, proszę wystawić fakturę imienną na dane:</div>
+                    <section className="account-form-section">
+                        <h3>Faktura imienna</h3>
+                        <p>Kupuję prywatnie, proszę wystawić fakturę imienną na dane:</p>
                         <AddrFormInputs
                             addrType={"inv_priv"}
                             register={props.register}
@@ -103,13 +104,14 @@ export const InvoiceFormInputs = (props: IInvoiceFormInputs) => {
                             prefixName="priv_"
                             forceRequired={forceRequired}
                         />
-                    </>
+                    </section>
                 )}
 
                 {props.order?.invoice && (
                     <>
-                        <div className="mt-6 has-text-weight-semibold is-size-6">Dane płatnika</div>
-                        <div className="is-size-6">Do zamówienia wystawimy fakturę VAT na dane:</div>
+                        <section className="account-form-section">
+                        <h3>Dane płatnika</h3>
+                        <p>Do zamówienia wystawimy fakturę VAT na dane:</p>
                         <AddrFormInputs
                             addrType={"inv_payer"}
                             register={props.register}
@@ -119,23 +121,25 @@ export const InvoiceFormInputs = (props: IInvoiceFormInputs) => {
                             prefixName="platnik_"
                             forceRequired={forceRequired}
                         />
+                        </section>
 
-                        <Input
-                            type="checkbox"
-                            id={PURCHASE_TYPE_CHECK_ID}
-                            onChange={onChange}
-                            defaultChecked={props.order?.recipent ? true : false}
-                            value={PURCHASE_TYPE_CHECK_ID}
-                            className="mt-5"
-                            required={false}
-                            register={props.register}
-                            label="dane odbiorcy są takie same jak dane płatnika"
-                        ></Input>
+                        <div className="account-form-checkbox">
+                            <Input
+                                type="checkbox"
+                                id={PURCHASE_TYPE_CHECK_ID}
+                                onChange={onChange}
+                                defaultChecked={props.order?.recipent ? true : false}
+                                value={PURCHASE_TYPE_CHECK_ID}
+                                required={false}
+                                register={props.register}
+                                label="Dane odbiorcy są takie same jak dane płatnika"
+                            ></Input>
+                        </div>
 
                         {!props.order?.recipent && (
-                            <>
-                                <div className="mt-2 has-text-weight-semibold is-size-6">Dane odbiorcy</div>
-                                <div className="is-size-6">Dla kogo dokonano zakupu (np. dane szkoły).</div>
+                            <section className="account-form-section">
+                                <h3>Dane odbiorcy</h3>
+                                <p>Dla kogo dokonano zakupu, np. dane szkoły.</p>
                                 <AddrFormInputs
                                     addrType={"inv_recipent"}
                                     register={props.register}
@@ -145,7 +149,7 @@ export const InvoiceFormInputs = (props: IInvoiceFormInputs) => {
                                     prefixName="odbiorca_"
                                     forceRequired={forceRequired}
                                 />
-                            </>
+                            </section>
                         )}
                     </>
                 )}

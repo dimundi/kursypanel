@@ -59,11 +59,14 @@ const UserData = () => {
         <>
             <UserDataContainer apiUserRequired={true} waitMsg="Pobieram dane użytkownika">
                 {isMobile && <div className="mb-3 has-text-weight-bold">Twoje dane osobowe</div>}
-                <form>
-                    <div className={"columns slim " + (isMobile ? " " : " m-2")}>
-                        <div className="column ">
-                            <p className="py-2">
-                                forma grzecznościowa oraz rodzajowa, którą będziemy używać podczas formatowania tekstu, np. na certyfikatach:
+                <form className="account-form-card">
+                    <div className="account-form-intro">
+                        <h2>Dane osobowe</h2>
+                        <p>Te dane wykorzystujemy między innymi przy generowaniu certyfikatów.</p>
+                    </div>
+                    <div className="account-form-grid">
+                        <div className="account-form-field is-short">
+                            <div className="account-field-note">Forma grzecznościowa</div>
                                 <Input
                                     id={"gender"}
                                     name="gender"
@@ -74,8 +77,8 @@ const UserData = () => {
                                     options={genderFormOptions}
                                     defaultValue={userData?.gender}
                                 ></Input>
-                            </p>
-                            <p className="py-2">
+                        </div>
+                        <div className="account-form-field">
                                 <Input
                                     id="first_name"
                                     name="first_name"
@@ -86,8 +89,8 @@ const UserData = () => {
                                     //errors={props.errors}
                                     required={false}
                                 ></Input>
-                            </p>
-                            <p className="py-2">
+                        </div>
+                        <div className="account-form-field">
                                 <Input
                                     id="last_name"
                                     name="last_name"
@@ -98,8 +101,8 @@ const UserData = () => {
                                     //errors={props.errors}
                                     required={false}
                                 ></Input>
-                            </p>
-                            <p className="py-2">
+                        </div>
+                        <div className="account-form-field">
                                 <Input
                                     id="email"
                                     name="email"
@@ -111,11 +114,10 @@ const UserData = () => {
                                     //errors={props.errors}
                                     required={false}
                                 ></Input>
-                            </p>
-
-                            <SubmitButton handleSubmit={handleSubmit} routine={saveDefault} isSubmitted={isSubmitted} />
-                            {/* <input className="button is-primary"  type="submit" value="Zapisz zmiany" onClick={handleSubmit(saveDefault)}/> */}
                         </div>
+                    </div>
+                    <div className="account-form-actions">
+                        <SubmitButton handleSubmit={handleSubmit} routine={saveDefault} isSubmitted={isSubmitted} />
                     </div>
                 </form>
             </UserDataContainer>
