@@ -31,67 +31,29 @@ export const NavbarUser = (props: INavbarUser) => {
         RequestClass.makeRequest("logout/", null, succ_callback, err_callback);
     };
 
-    function showBasket() {
-        return (
-            <>
-                {props.basketCnt !== undefined && props.basketCnt > 0 && (
-                    <Link to="/koszyk" reloadDocument title="koszyk">
-                        <a className="button px-2 py-1">
-                            <FontAwesomeIcon icon={faCartShopping} />
-                            &nbsp;{props.basketCnt}
-                        </a>
-                    </Link>
-                )}
-            </>
-        );
-    }
-    return (
-        <>
-            {isLogged === true ? (
-                <>
-                    {showBasket()}
-                    <a className="ml-1 " href="/szkolenia/kursy">
-                        <a className="button px-2 py-1">Moje kursy</a>
-                    </a>
-                    {/* <Link to="/kursy" reloadDocument className="ml-1">
-                        <a className="button px-2 py-1">Moje kursy</a>
-                    </Link> */}
-                    {/* <Link to="/kursy" reloadDocument className="ml-1">
-                        <a className="button px-2 py-1">Bieg Belfrów</a>
-                    </Link> */}
-                    <a className="ml-1 " href="/bb/panel">
-                        <a className="button px-2 py-1 is-warning">Bieg Belfrów</a>
-                    </a>
-                    <Link to="/konto" reloadDocument className="ml-1">
-                        <a className="button px-2 py-1">Konto</a>
-                    </Link>
+    const basket = props.basketCnt !== undefined && props.basketCnt > 0 ? (
+        <Link to="/koszyk" reloadDocument title="Koszyk" className="button px-2 py-1">
+            <FontAwesomeIcon icon={faCartShopping} />&nbsp;{props.basketCnt}
+        </Link>
+    ) : null;
 
-                    <a className="ml-1" onClick={handleLogoutBtn} title="Wyloguj">
-                        <a className="button px-2 py-2">
-                            <i className="fa-solid fa-right-from-bracket"></i>
-                        </a>
-                    </a>
-                </>
-            ) : (
-                <>
-                    <div className="buttons">
-                        {showBasket()}
-                        {props.system === SYSTEM_CHOICES.SYSTEM_BB ? (
-                            <></>
-                        ) : (
-                            // <Link to="/zapisy" reloadDocument>
-                            //     <div className="button is-warning">Zapisz się</div>
-                            // </Link>
-                            <Link to="/rejestracja" reloadDocument>
-                                <div className="button is-primary">Zarejestruj</div>
-                            </Link>
-                        )}
-                        <Link to="/login" reloadDocument>
-                            <div className="button is-light">Zaloguj</div>
-                        </Link>
-                    </div>
-                </>
-            )}
+    return isLogged ? (
+        <>
+            {basket}
+            <a href="/szkolenia/kursy" className="button">Moje kursy</a>
+            <a href="/bb/panel" className="button is-warning">Bieg Belfrów</a>
+            <Link to="/konto" className="button">Konto</Link>
+            <button type="button" className="button" onClick={handleLogoutBtn} title="Wyloguj" aria-label="Wyloguj się">
+                <i className="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+            </button>
         </>
+    ) : (
+        <div className="buttons">
+            {basket}
+            {props.system !== SYSTEM_CHOICES.SYSTEM_BB && (
+                <Link to="/rejestracja" className="button is-primary">Zarejestruj się</Link>
+            )}
+            <Link to="/login" className="button is-light">Zaloguj się</Link>
+        </div>
     );
 };

@@ -1,3 +1,4 @@
+import "./PanelTheme.scss";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 import ProtectRoute from "./ProtectRoute";
@@ -43,14 +44,14 @@ const PageLayout = (props: { children: JSX.Element; isProtected?: boolean; bodyC
         // mobileClass=" p-3 "
     }
     return (
-        <div className="is-flex is-flex-direction-column is-fullheight-100vh ">
-            <section className="pt-2 px-2">
+        <div data-theme="light" className="training-panel is-flex is-flex-direction-column is-fullheight-100vh">
+            <header className="panel-header">
                 <Navigation />
-            </section>
+            </header>
 
-            <div className={"is-flex-grow-1 " + mobileClass + props.bodyClassName}>
+            <main id="training-content" className={"training-content is-flex-grow-1 " + mobileClass + (props.bodyClassName || "")}>
                 {props.isProtected === true ? <ProtectRoute>{props.children}</ProtectRoute> : <>{props.children}</>}
-            </div>
+            </main>
 
             <Footer />
         </div>

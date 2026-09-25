@@ -189,7 +189,7 @@ export const Input = (props: InputProps) => {
             {
                 (type === "text" || type === "textarea" || type === "password" || type === "select") && (
                     /* dla text label jest przed inputem */
-                    <InputLabel label={props.label} className={props.labelClassName} />
+                    <InputLabel htmlFor={props.id} label={props.label} className={props.labelClassName} />
                 )
                 // (props.label  &&
                 // <label className='is-size-7'><div dangerouslySetInnerHTML={{__html: props.label}}></div></label>
@@ -260,7 +260,7 @@ export const Input = (props: InputProps) => {
 
             {
                 type !== "text" && type !== "textarea" && type !== "password" && type !== "select" && (
-                    <InputLabel label={props.label} className={props.labelClassName ? props.labelClassName : "ml-2"} />
+                    <InputLabel htmlFor={props.id} label={props.label} className={props.labelClassName ? props.labelClassName : "ml-2"} />
                 )
                 // (props.label  &&
                 //   <label className='mb-1'><span className='ml-2' dangerouslySetInnerHTML={{__html: props.label}}></span></label>

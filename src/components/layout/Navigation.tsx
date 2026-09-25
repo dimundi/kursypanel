@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
-import logo from "../../static/ODNRewers_sm.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import bblogo from "../../static/BB_logo.png";
-// import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logo from "../../static/rewers-logo.svg";
+import { Link, useLocation } from "react-router-dom";
 import { NavbarOferta } from "./NavbarOferta";
 import { NavbarUser } from "./NavbarUser";
 import AnimationSideButton from "../elements/AnimationSideButton";
@@ -12,93 +9,38 @@ import AnimationSideButton from "../elements/AnimationSideButton";
 const Navigation = () => {
     const [isHamburgerActive, setIsHamburgerActive] = React.useState(false);
     const { basketCnt, inquiryCnt } = useContext(UserContext);
-    const navigation = useNavigate();
     const location = useLocation();
-
-    let categoryId = "";
-    if (location.pathname.includes("/list/")) {
-        categoryId = location.pathname.substring(location.pathname.length - 1);
-    }
-
+    const categoryId = location.pathname.includes("/list/") ? location.pathname.slice(-1) : "";
+    useEffect(() => { setIsHamburgerActive(false); }, [location.pathname]);
     return (
         <>
-            {inquiryCnt > 0 &&
-                location.pathname.includes("zapytanie") === false &&
-                location.pathname.includes("kontakt") === false && (
-                    <AnimationSideButton to={"/zapytanie/" + categoryId} />
-                    // <div className="fix-bottom-button">
-                    //     <Link to={"/zapytanie/" + categoryId} className="has-text-white">
-                    //         Twoje zapytanie
-                    //     </Link>
-                    // </div>
-                )}
-
-            <nav className="navbar" role="navigation" aria-label="main navigation">
+            {inquiryCnt > 0 && !location.pathname.includes("zapytanie") && !location.pathname.includes("kontakt") && (
+                <AnimationSideButton to={"/zapytanie/" + categoryId} />
+            )}
+            <nav className="navbar panel-navbar" aria-label="Nawigacja panelu szkoleń">
                 <div className="navbar-brand">
-                    <div className="navbar-item is-clickable" onClick={() => navigation("/")}>
-                        <a href="https://odnrewers.pl">
-                            <img src={logo} alt="ODN Rewers" />
-                        </a>
-                    </div>
-                    <div className="navbar-item is-clickable" onClick={() => navigation("/")}>
-                        <a href="https://biegbelfrow.pl/bb/">
-                            <img src={bblogo} alt="Bieg Belfrów" />
-                        </a>
-                    </div>
-
-                    {/* <Link to="/koszyk" reloadDocument className="navbar-item navbar-burger burger">
-                <FontAwesomeIcon icon={faCartShopping} />{basketCnt}
-                </Link> */}
-
-                    <div
-                        onClick={() => {
-                            setIsHamburgerActive(!isHamburgerActive);
-                        }}
-                        role="button"
+                    <a className="navbar-item panel-brand" href="https://odnrewers.pl/" aria-label="Rewers — strona główna">
+                        <img src={logo} alt="Rewers — Ośrodek Doskonalenia Nauczycieli" width="200" height="42" />
+                    </a>
+                    <button type="button" onClick={() => setIsHamburgerActive(!isHamburgerActive)}
                         className={`navbar-burger burger ${isHamburgerActive ? "is-active" : ""}`}
-                        aria-label="menu"
-                        aria-expanded="false"
-                        data-target="navbarMainMenu"
-                    >
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </div>
+                        aria-label={isHamburgerActive ? "Zamknij menu" : "Otwórz menu"}
+                        aria-expanded={isHamburgerActive} aria-controls="navbarMainMenu">
+                        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+                    </button>
                 </div>
-
-                <div id="navbarMainMenu" className={`navbar-menu ${isHamburgerActive ? " is-active" : ""}`}>
+                <div id="navbarMainMenu" className={`navbar-menu ${isHamburgerActive ? "is-active" : ""}`}>
                     <div className="navbar-start">
-                        {isHamburgerActive ? (
-                            <NavbarOferta />
-                        ) : (
-                            <div className="navbar-item has-dropdown is-hoverable">
-                                <a
-                                    className="navbar-link"
-                                    onClick={() => {
-                                        if (isHamburgerActive) setIsHamburgerActive(!isHamburgerActive);
-                                    }}
-                                >
-                                    Oferta szkoleń
-                                </a>
-
-                                <div className="navbar-dropdown is-active">
-                                    <NavbarOferta />
-                                </div>
-                            </div>
-                        )}
-
-                        <Link to="/kontakt" reloadDocument className="navbar-item">
-                            Kontakt
-                        </Link>
+                        <div className="navbar-item has-dropdown is-hoverable">
+                            <button type="button" className="navbar-link panel-offer-toggle">Oferta szkoleń</button>
+                            <div className="navbar-dropdown"><NavbarOferta /></div>
+                        </div>
+                        <Link to="/kontakt" className="navbar-item">Kontakt</Link>
                     </div>
-
-                    <div className="navbar-end">
-                        <NavbarUser basketCnt={basketCnt} />
-                    </div>
+                    <div className="navbar-end panel-account-nav"><NavbarUser basketCnt={basketCnt} /></div>
                 </div>
             </nav>
         </>
     );
 };
-
 export default Navigation;

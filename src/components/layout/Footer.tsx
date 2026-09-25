@@ -9,13 +9,13 @@ import fblogo from "../../static/facebook.png";
 const Footer = () => {
     return (
         <>
-            <CookieConsent buttonText="Rozumiem i kontynuuję przeglądanie strony.">
+            <CookieConsent containerClasses="panel-cookie" buttonClasses="panel-cookie-button" buttonText="Rozumiem i kontynuuję przeglądanie strony.">
                 Ta strona wykorzystuje pliki cookies. Zapoznaj się z naszą{" "}
                 <CustomLinks linkType={CUSTOM_LINK_TYPE.REWERS_SHOP_RULES} showIcon={false} label={<>polityką prywatności</>} />.{" "}
             </CookieConsent>
 
             {/* <div className="my-3"></div> */}
-            <div className="has-text-centered is-flex-align-items-flex-end mt-auto ">
+            <div className="panel-footer has-text-centered is-flex-align-items-flex-end mt-auto">
                 <div className="content has-text-centered has-background-white-ter py-6">
                     <Debug>
                         <div>Renderuję na: {isMobile ? "TELEFONIE" : "KOMPUTERZE"}</div>
@@ -30,7 +30,7 @@ const Footer = () => {
                                 <br />
                                 tel. {TELEFON_BIURO} {EMAIL_BIURO}
                                 <div className="mt-4">
-                                    <a href="https://www.facebook.com/osrodekrewers" target="_blank">
+                                    <a href="https://www.facebook.com/osrodekrewers" target="_blank" rel="noopener noreferrer">
                                         <img src={fblogo} alt="Nasza strona na fecebook" width="5%" />
                                         <span className="ml-2">https://www.facebook.com/osrodekrewers</span>
                                     </a>

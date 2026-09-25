@@ -17,6 +17,23 @@ interface IUsrMsgTemplFull extends IUsrMsgTempl {
 }
 
 export default function UsrMsgTempl(props: IUsrMsgTemplFull) {
+    if (props.system !== SYSTEM_CHOICES.SYSTEM_BB) {
+        return (
+            <section className="panel-auth" aria-label={props.title || "Konto uczestnika"}>
+                <div className="panel-auth-intro">
+                    <span className="panel-eyebrow">PLATFORMA SZKOLENIOWA</span>
+                    <h1>Twoja przestrzeń<br />do nauki.</h1>
+                    <p>Szkolenia, materiały i zaświadczenia.<br />Wszystko w jednym miejscu.</p>
+                    <a href="https://odnrewers.pl/" className="panel-back-link">← Wróć do strony Rewers</a>
+                </div>
+                <div className={"panel-auth-card " + (props.className || "")}>
+                    <h2 className="panel-auth-title">{props.title}</h2>
+                    {props.subtitle && <p className="panel-auth-subtitle">{props.subtitle}</p>}
+                    {props.children}
+                </div>
+            </section>
+        );
+    }
     return (
         <>
             <section className="mb-5">

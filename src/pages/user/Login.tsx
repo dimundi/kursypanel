@@ -83,7 +83,7 @@ export default function Login(props: ILogin) {
     /* ----------------------------------------------------------------------*/
     return (
         <UsrMsgTempl
-            title="Zaloguj"
+            title="Zaloguj się"
             system={props.system}
             noImage={props.noImage}
             className={props.className}
@@ -94,7 +94,7 @@ export default function Login(props: ILogin) {
                     <Input
                         id={"login"}
                         name="login"
-                        placeholder="Login"
+                        placeholder="Login" label="Login"
                         register={register}
                         errors={errors}
                         className="mt-2"
@@ -104,7 +104,7 @@ export default function Login(props: ILogin) {
                         type="password"
                         id={"haslo"}
                         name="haslo"
-                        placeholder="hasło"
+                        placeholder="Hasło" label="Hasło"
                         register={register}
                         errors={errors}
                         className="mt-2"
